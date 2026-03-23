@@ -54,7 +54,7 @@ BUTTON_LAYOUT = {
 # Set to "reach"     – standard reach-to-target experiment
 #        "transport" – pick-and-place cube transport
 #        "obstacle"  – pick-and-place with spherical obstacle cloud
-EXP_TYPE = "obstacle"  # "reach" | "transport" | "obstacle"
+EXP_TYPE = "transport"  # "reach" | "transport" | "obstacle"
 
 # ── reach experiment configuration ───────────────────────────────────────────
 EXP_N_TRIALS = 10

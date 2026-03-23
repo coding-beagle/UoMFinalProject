@@ -8,7 +8,7 @@ Edit values here; nothing else needs to change.
 from math import pi
 
 # ── camera configuration ──────────────────────────────────────────────────────
-CAMERA_INDICES = [0, 1]  # OpenCV device indices; edit to match your setup
+CAMERA_INDICES = [0]  # OpenCV device indices; edit to match your setup
 PRIMARY_CAMERA = 0  # which index in CAMERA_INDICES is the preferred source
 TILE_WIDTH = 640  # display width of the primary (HUD) camera tile
 SECONDARY_TILE_WIDTH = 240
@@ -71,8 +71,8 @@ OBS_N_TRIALS = 10
 OBS_PICK_RADIUS = 0.06
 OBS_DROP_RADIUS = 0.06
 OBS_TIMEOUT = 100.0
-OBS_MIN_REACH = 0.9
-OBS_MAX_REACH = 0.9
+OBS_MIN_REACH = 0.93
+OBS_MAX_REACH = 0.93
 OBS_MIN_ELEV = -25.0
 OBS_MAX_ELEV = 40.0
 OBS_AZ_MIN = 50.0
