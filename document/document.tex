@@ -346,6 +346,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
 
     \begin{table}[h]
       \label{tab:rmse_comparison}
+      \caption{RMSE error of either tracking method.}
       \centering
       \small
       \begin{tabular}{>{\raggedright\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}}
@@ -357,7 +358,6 @@ This section aims to develop a minimum viable product (MVP) version of both meth
       Marker Tracking & N/A & N/A & N/A & N/A \\
       \bottomrule
       \end{tabular}
-      \caption{RMSE error of either tracking method}
     \end{table}
 
     Whilst the two dimensional RMSE error is larger than the literature suggests, the three dimensional joint error shows better accuracy than expected.
@@ -368,13 +368,24 @@ This section aims to develop a minimum viable product (MVP) version of both meth
     This was obtained from an experiment wherein a marker is held up to the camera and rotated around various axes, measuring the captured rotation.
     
     \autoref{fig:arucomarkerresults} shows a plot of the measured roll angle, and shows the gaps in which no measurement was made.
+    Likewise, the background conditions of the image also made a major difference to whether or not the marker was tracked.
+    For example, \autoref{fig:arucoinstable} shows the marker not tracking whilst not distorted by angle at all, compared to being tracked at a very large angle.
     Clearly this level of unreliability is unsuitable for the final tracking task, and therefore no further testing will be required.
 
     \begin{figure}[h!]
       \centering
-      \includegraphics[width=\linewidth]{images/measuredrollangle.png}
-      \caption{Measured vs Expected graph of pitch of ArUco marker}
+      \includegraphics[width=\linewidth]{images/aruco_error.png}
+      \caption{Measured vs Expected graph of roll angle of ArUco marker.}
       \label{fig:arucomarkerresults}
+    \end{figure}
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.3\linewidth]{images/ArUco1.png}
+      \hspace{0.75em}
+      \includegraphics[width=0.3\linewidth]{images/ArUco2.png}  
+      \caption{Background dependence of the ArUco marker.}
+      \label{fig:arucoinstable}
     \end{figure}
 
     An interesting aspect that was encountered when performing the accuracy characterisation experiments with pose estimation is shown in \autoref{fig:weezered}, and points to a downside not immediately apparent.
@@ -384,20 +395,22 @@ This section aims to develop a minimum viable product (MVP) version of both meth
     \begin{figure}[h!]
       \centering
       \includegraphics[scale=0.8]{images/weezered.png}
-      \caption{Pose estimation software mistaking a picture of humans printed on the clothing for an actual person.}
+      \caption{Pose estimation software mistaking a picture of humans printed on clothing for an actual person.}
       \label{fig:weezered}
     \end{figure}
 
   \subsection{Final Tracking Method}
 
-  Results show that the pose estimation is roughly able to achieve the \(5 \degree\) measurements required for the project.
+  Results show that the pose estimation model is not able to achieve the \(3 \degree\) required for the project, it is able to get within the same order of magnitude of accuracy.
   Moreover, the mediapipe model used to power this is optimised for real time measurement; using a \(30 \text{ fps}\) camera, each measurement takes \(33 \text{ ms}\), well below the required \(300 \text{ ms}\).
   Hence, the comparison between conventional joystick control and human arm tracking teleoperation will use the pose estimation approach for comparison.
 
 %%%%%%%%%%%%%%%%%% RESULTS %%%%%%%%%%%%%%%%%%
 % \pagebreak
-\section{Experiments to characterise the difference in performance of arm tracking vs conventional control methods} \label{sec:results}
+\section{Arm tracking vs conventional control experiments} \label{sec:results}
 \label{sec:experiments}
+
+    This section explains three scenarios that have been devised in CoppeliaSim to try and characterise the performance of each tracking method.
 
   \subsection{Description of experiment to compare conventional vs human arm tracking}
     In order to compare fairly the two methods of control, three scenarios will be examined:
@@ -451,10 +464,10 @@ This section aims to develop a minimum viable product (MVP) version of both meth
   \subsection{Scenario 1: Random position matching task}
   \label{sec:scen1}
   \(100\) samples were taken, with \(10\) runs of \(10\) experiments. 
-  Analysis of variance (ANOVA) shows no significant deviation between each run (see appendix \textbf{TODO figure this out}).
+  Analysis of variance (ANOVA) shows no significant deviation between each run (see appendix for detailed ANOVA results).
   The controller method was roughly \(42 \%\) faster than the pose estimation algorithm, although with a lower standard deviation of 0.043 compared to 0.053.
   
-  The speed difference is likely attributable to the operator's familiarity of using controllers in video games, boasting over \(10\) years of meaningful experience in this field.
+  The speed difference is likely attributable to the operator's familiarity of using controllers for other tasks.
   Notably, the difference in standard deviation could imply that pose estimation is stronger for tasks that require consistency, rather than outright speed.
 
   \begin{figure}[h!]
@@ -542,6 +555,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
 
     \begin{table}[h]
       \centering
+      \label{tab:dh_parameters}
       \small
       \begin{tabular}{>{\centering\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}}
       \toprule
@@ -563,9 +577,10 @@ This section aims to develop a minimum viable product (MVP) version of both meth
       \bottomrule
       \end{tabular}
       \caption{Denavit-Hartenberg Parameters for 7-DoF Arm (where \(L_u\) is upper arm length and \(L_l\) is lower arm length)}
-      \label{tab:dh_parameters}
     \end{table}
     
+    \section{ANOVA Figures}\
+
     %\subsection{Other appendices as necessary}
 \end{uomappendix}
 
