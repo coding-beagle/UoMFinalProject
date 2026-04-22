@@ -198,8 +198,8 @@
       \strng{authorbibnamehash}{9fd88443959a1e2b484474f9b8b51f50}
       \strng{authornamehash}{d7f97f1d627312cfc3c597996c3806a5}
       \strng{authorfullhash}{9fd88443959a1e2b484474f9b8b51f50}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Electronics}
@@ -233,8 +233,8 @@
       \strng{authorbibnamehash}{2d8eb33caab00bd58089de79f36024ff}
       \strng{authornamehash}{2d8eb33caab00bd58089de79f36024ff}
       \strng{authorfullhash}{2d8eb33caab00bd58089de79f36024ff}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{International Journal of Human-Computer Interaction}
@@ -434,35 +434,6 @@
       \verb 10.1109/mmsp.1999.793896
       \endverb
     \endentry
-    \entry{ref:whatmocap}{misc}{}
-      \name{author}{1}{}{%
-        {{hash=453175561828c414a707d30e167c66ab}{%
-           family={Crawford},
-           familyi={C\bibinitperiod},
-           given={Matt},
-           giveni={M\bibinitperiod}}}%
-      }
-      \strng{namehash}{453175561828c414a707d30e167c66ab}
-      \strng{fullhash}{453175561828c414a707d30e167c66ab}
-      \strng{bibnamehash}{453175561828c414a707d30e167c66ab}
-      \strng{authorbibnamehash}{453175561828c414a707d30e167c66ab}
-      \strng{authornamehash}{453175561828c414a707d30e167c66ab}
-      \strng{authorfullhash}{453175561828c414a707d30e167c66ab}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Filmmaking Lifestyle}
-      \field{month}{3}
-      \field{title}{What is motion capture (Mo-Cap): The definitive guide}
-      \field{year}{2025}
-      \verb{urlraw}
-      \verb https://filmlifestyle.com/what-is-motion-capture/
-      \endverb
-      \verb{url}
-      \verb https://filmlifestyle.com/what-is-motion-capture/
-      \endverb
-    \endentry
     \entry{ref:mocapwhy}{misc}{}
       \name{author}{1}{}{%
         {{hash=92e36718632a43c1b8b1eda6e1878405}{%
@@ -495,6 +466,35 @@
       \verb https://www.americanmovieco.com/blog/motion-capture-why-is-it-needed-and-how-does-it-work
       \endverb
     \endentry
+    \entry{ref:whatmocap}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=453175561828c414a707d30e167c66ab}{%
+           family={Crawford},
+           familyi={C\bibinitperiod},
+           given={Matt},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{453175561828c414a707d30e167c66ab}
+      \strng{fullhash}{453175561828c414a707d30e167c66ab}
+      \strng{bibnamehash}{453175561828c414a707d30e167c66ab}
+      \strng{authorbibnamehash}{453175561828c414a707d30e167c66ab}
+      \strng{authornamehash}{453175561828c414a707d30e167c66ab}
+      \strng{authorfullhash}{453175561828c414a707d30e167c66ab}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Filmmaking Lifestyle}
+      \field{month}{3}
+      \field{title}{What is motion capture (Mo-Cap): The definitive guide}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://filmlifestyle.com/what-is-motion-capture/
+      \endverb
+      \verb{url}
+      \verb https://filmlifestyle.com/what-is-motion-capture/
+      \endverb
+    \endentry
     \entry{ref:teleopanalysis}{article}{}
       \name{author}{3}{}{%
         {{hash=c7d2e713ce207bdc03d8c7249fa0dd0f}{%
@@ -519,8 +519,8 @@
       \strng{authorbibnamehash}{d317bbff35d1d90fedb885f505218f74}
       \strng{authornamehash}{7857228458be98e06c88c8a7b9807421}
       \strng{authorfullhash}{d317bbff35d1d90fedb885f505218f74}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Applied Ergonomics}
@@ -844,8 +844,8 @@
       \strng{authorbibnamehash}{ba1397c4a219f577db4de433ec96c982}
       \strng{authornamehash}{ba1397c4a219f577db4de433ec96c982}
       \strng{authorfullhash}{633662f0e4f31768ee1e3c91a248dac1}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Technical Transactions}
@@ -856,121 +856,6 @@
       \verb{doi}
       \verb 10.37705/techtrans/e2020036
       \endverb
-    \endentry
-    \entry{ref:jCAS10}{article}{}
-      \name{author}{5}{}{%
-        {{hash=e7f8bb9662039ed7cc169b2d84af04e1}{%
-           family={Casson},
-           familyi={C\bibinitperiod},
-           given={Alexander\bibnamedelima J.},
-           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=19f431c00504e9f4d5a59d31cb6fd492}{%
-           family={Yates},
-           familyi={Y\bibinitperiod},
-           given={David\bibnamedelima C.},
-           giveni={D\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
-        {{hash=0454635ea2db437d8981208febc07709}{%
-           family={Smith},
-           familyi={S\bibinitperiod},
-           given={Shelagh\bibnamedelima J.M.},
-           giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=1e1854c2e37178f250f2cb00fcd055ee}{%
-           family={Duncan},
-           familyi={D\bibinitperiod},
-           given={John\bibnamedelima S.},
-           giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
-        {{hash=418cd1036e680b915a56e273f57cf20d}{%
-           family={Rodriguez-Villegas},
-           familyi={R\bibinithyphendelim V\bibinitperiod},
-           given={Esther},
-           giveni={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{5a9563c04dfce5dedda8b82db559411c}
-      \strng{fullhash}{52cb6da492c3ec0528a842acb5cfb767}
-      \strng{bibnamehash}{5a9563c04dfce5dedda8b82db559411c}
-      \strng{authorbibnamehash}{5a9563c04dfce5dedda8b82db559411c}
-      \strng{authornamehash}{5a9563c04dfce5dedda8b82db559411c}
-      \strng{authorfullhash}{52cb6da492c3ec0528a842acb5cfb767}
-      \field{extraname}{1}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE Eng. Biol. Med. Mag.}
-      \field{number}{3}
-      \field{title}{Wearable electroencephalography}
-      \field{volume}{29}
-      \field{year}{2010}
-      \field{pages}{44\bibrangedash 56}
-      \range{pages}{13}
-    \endentry
-    \entry{ref:jCAS09}{article}{}
-      \name{author}{3}{}{%
-        {{hash=e7f8bb9662039ed7cc169b2d84af04e1}{%
-           family={Casson},
-           familyi={C\bibinitperiod},
-           given={Alexander\bibnamedelima J.},
-           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=a63acb09d3205b922b4f79c3fc2525be}{%
-           family={Luna},
-           familyi={L\bibinitperiod},
-           given={Elena},
-           giveni={E\bibinitperiod}}}%
-        {{hash=418cd1036e680b915a56e273f57cf20d}{%
-           family={Rodriguez-Villegas},
-           familyi={R\bibinithyphendelim V\bibinitperiod},
-           given={Esther},
-           giveni={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{5a9563c04dfce5dedda8b82db559411c}
-      \strng{fullhash}{c1ad886e10f3ba4a891ce149468a07ef}
-      \strng{bibnamehash}{c1ad886e10f3ba4a891ce149468a07ef}
-      \strng{authorbibnamehash}{c1ad886e10f3ba4a891ce149468a07ef}
-      \strng{authornamehash}{5a9563c04dfce5dedda8b82db559411c}
-      \strng{authorfullhash}{c1ad886e10f3ba4a891ce149468a07ef}
-      \field{extraname}{2}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{J. Neurosci. Meth.}
-      \field{number}{2}
-      \field{title}{Performance metrics for the accurate characterisation of interictal spike detection algorithms}
-      \field{volume}{177}
-      \field{year}{2009}
-      \field{pages}{479\bibrangedash 487}
-      \range{pages}{9}
-    \endentry
-    \entry{ref:jCAS09a}{article}{}
-      \name{author}{2}{}{%
-        {{hash=e7f8bb9662039ed7cc169b2d84af04e1}{%
-           family={Casson},
-           familyi={C\bibinitperiod},
-           given={Alexander\bibnamedelima J.},
-           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=418cd1036e680b915a56e273f57cf20d}{%
-           family={Rodriguez-Villegas},
-           familyi={R\bibinithyphendelim V\bibinitperiod},
-           given={Esther},
-           giveni={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{a73e75fe6b7891d2e35bee7ab49db0e6}
-      \strng{fullhash}{a73e75fe6b7891d2e35bee7ab49db0e6}
-      \strng{bibnamehash}{a73e75fe6b7891d2e35bee7ab49db0e6}
-      \strng{authorbibnamehash}{a73e75fe6b7891d2e35bee7ab49db0e6}
-      \strng{authornamehash}{a73e75fe6b7891d2e35bee7ab49db0e6}
-      \strng{authorfullhash}{a73e75fe6b7891d2e35bee7ab49db0e6}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE T. Biomed. Eng.}
-      \field{number}{12}
-      \field{title}{Toward online data reduction for portable electroencephalography systems in epilepsy}
-      \field{volume}{56}
-      \field{year}{2009}
-      \field{pages}{2816\bibrangedash 2825}
-      \range{pages}{10}
     \endentry
   \enddatalist
 \endrefsection

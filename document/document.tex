@@ -174,18 +174,23 @@ Acknowledgments go here.
   Hence, exploration of the performance characteristics between conventional control methods and arm mapped teleoperation is undertaken.
 
   \subsection{Aims and objectives}
-  The overall aim is to compare the performance of a system for mapping the joint angles of a human arm to a shoulder-mounted robot arm to conventional control methods.
+  The overall aim is to compare the performance of a system for mapping the joint angles of a human arm to a shoulder-mounted robot arm to conventional control methods. 
+  This will include:
 
-  To achieve this goal there will be an evaluation of available arm tracking methods, including:
-  \begin{description}
-    \item [\autoref{sec:litrev}] - Identifying and comparing existing technologies, including IMU based solutions discussed earlier, attitude and heading reference systems \cite{ref:Mazomenos_Biswas_Cranny_Rajan_Maharatna_Achner_Klemke_Jobges_Ortmann_Langendorfer_2016}, computer vision based systems \cite{ref:Phuong_Cong_2024}, and flex sensor based systems \cite{ref:Nalam_Manivannan_2014}.
-    \item [\autoref{sec:methods}] - Developing a version of the tracking system suitable for controlling a simulation of the YuMi robot arm.
-    \item [\autoref{sec:results}] - Devising experiments appropriate to comparing conventional methods of control to arm tracking teleoperation methods.
-    \item [\autoref{sec:conc}] - Analysing the difference, if any, in performance between either method of control.
-  \end{description}
+  \begin{itemize}
+    \item Identifying and comparing existing technologies, including IMU based solutions discussed earlier, attitude and heading reference systems \cite{ref:Mazomenos_Biswas_Cranny_Rajan_Maharatna_Achner_Klemke_Jobges_Ortmann_Langendorfer_2016}, computer vision based systems \cite{ref:Phuong_Cong_2024}, and flex sensor based systems \cite{ref:Nalam_Manivannan_2014}.
+    \item Developing a version of the tracking system suitable for controlling a simulation of the YuMi robot arm.
+    \item Devising experiments appropriate to comparing conventional methods of control to arm tracking teleoperation methods.
+    \item Analysing the difference, if any, in performance between either method of control in a variety of environments.
+  \end{itemize}
 
 %%%%%%%%%%%%%%%%%% LITERATURE REVIEW %%%%%%%%%%%%%%%%%%
 \section{Examination of existing human to robot arm teleoperation methods}
+
+  This section explores which arm tracking methods are the most suitable for this project.
+  Quantitative and qualitative data from secondary research is used to create a justified specification for the final solution.
+  Finally, a Pugh matrix will be applied to fairly score and select an appropriate method to further develop.
+
 \label{sec:litrev}
 
   \subsection{Why choose teleoperation over conventional input methods}
@@ -230,20 +235,17 @@ Acknowledgments go here.
       \toprule
       \textbf{Method} & \textbf{Complexity \(1-5\)} & \textbf{Cheapness \(1-5\)} & \textbf{Accuracy \(1-5\)} & \textbf{Latency (\(1-5\))} & \textbf{Total} \\
       \midrule
-      IMU-based & \(3\) & \(4\) & \(3\) & \(5\) & \(15\) \\
-       & \(100\text{ hours}\) inc PCB design + drift correction & £\(50-\text{£}60\) & \(2.8 \degree\) \cite{ref:imuerror} & <1 ms \cite{ref:imudatasheet} & \\
-      \midrule
       Pose estimation via computer vision & \(5\) & \(5\) & \(3\) & \(5\) & \(18\) \\
        & Existing solutions reduce complexity \(30 - 40\text{ hours}\) & £\(30\) USB Camera & \(10\degree-15\degree\) \cite{ref:cverror} & \(\le 100 \text{ ms}\) \cite{ref:cvlatency} & \\
       \midrule
-      Flex Sensors & 2 & 4 & 4 & 5 & 15 \\
-       & \(150 \text{ hours}\) & £40-60 & \(10\degree\) \cite{ref:bendaccuracy} & \(\le 100 \text{ ms}\) & \\
-      % \midrule
-      % AHRS & 3 & 3 & 4 & 5 & 15 \\
-      %  & Moderate setup & £80-120 & 5-10° error & 100-200ms & \\
-      \midrule
       Marker tracking via computer vision & \(5\) & \(3\) & \(5\) & \(5\) & \(18\) \\
        & Very complex, though can be simplified through FOSS & £180+ for Vicon, cheaper solutions exist & <5° error & 100-200ms & \\
+       \midrule
+      IMU-based & \(3\) & \(4\) & \(3\) & \(5\) & \(15\) \\
+       & \(100\text{ hours}\) including PCB design + drift correction & £\(50-\text{£}60\) & \(2.8 \degree\) \cite{ref:imuerror} & <1 ms \cite{ref:imudatasheet} & \\
+      \midrule
+      Flex Sensors & 2 & 4 & 4 & 5 & 15 \\
+       & \(150 \text{ hours}\) & £40-60 & \(10\degree\) \cite{ref:bendaccuracy} & \(\le 100 \text{ ms}\) & \\
       \bottomrule
       \end{tabular}
       \caption{Pugh Matrix with detailed scoring justifications}
@@ -251,22 +253,26 @@ Acknowledgments go here.
     \end{table}
 
     Analysis of existing methods shows that the two computer vision approaches score similarly in terms of viability, therefore further analysis will be required to confirm the viability of each method.
-    The accuracy advantage of the marker tracking method makes it more appealing, though this is offset by the stupendous cost of conventional Vicon camera systems.
-
-    Open source software along with ArUco markers could be used to offset this cost, which will make further analysis necessary before choosing a final method.
+    These will be performed in the form of accuracy and latency experiments.
+    This has the advantage of being able to examine more factors than existing literature - of particular interest is the accuracy of measuring multiple joints angles simultaneously.
+    
+    In particular, the potential accuracy advantage of the marker tracking method makes it more appealing, though this is offset by the stupendous cost of conventional Vicon camera systems.
+    However, open source software along with ArUco markers could be used to offset this cost - which is worth exploring before committing to any substantial development.
     For example, \citeauthor{ref:arucomarkers} describes using ArUco markers along with standard home cameras to perform specialised kinematic analysis \cite{ref:arucomarkers}.
-
-    These will be performed in the form of accuracy and latency experiments, which will give the freedom of being able to analyse more factors than the literature - including accuracy of measuring multiple joints angles simultaneously.
   
 %%%%%%%%%%%%%%%%%% METHODS %%%%%%%%%%%%%%%%%%
 % \pagebreak
 \section{Comparing two viable computer vision based methods of robot arm teleoperation} \label{sec:methods}
+
+The criteria selected both ArUco marker tracking and pose estimation as equally viable methods of human arm tracking. 
+This section aims to develop a minimum viable product (MVP) version of both methods to be used to quantify which approach is more suitable for the final solution.
+
 \label{sec:methods}
 
   \subsection{Comparison of both computer vision methods}
     In order to evaluate the accuracy of both computer vision methods, a simple experiment was set up to measure the absolute accuracy on the joint angles that can be measured.
     A goniometer is attached to the wall at \(90 \degree\), with two end positions marked at \(90 \degree\) and \(180 \degree\).
-    The subject will move their arm repeatedly between these markers, and the recording is captured by a camera as described in fig \ref{fig:datacollection}.
+    The subject will move their arm repeatedly between these markers, and the recording is captured by a camera as described in \autoref{fig:datacollection}.
 
     \begin{figure}[h!]
       \centering
@@ -287,7 +293,7 @@ Acknowledgments go here.
 
     This creates enough samples to perform ANOVA between each video, to maintain experimental integrity.
     In order to measure error, the graph of elbow flexion angles is extended towards the \(90 \degree\) and \(180 \degree\) endpoints.
-    This secondary graph is then subtracted from the first graph to obtain the error value, from which we can calculate the root mean square error, and is shown in fig \ref{fig:elbow_flex_example}.
+    This secondary graph is then subtracted from the first graph to obtain the error value, from which we can calculate the root mean square error, and is shown in \autoref{fig:elbow_flex_example}.
     
     \begin{figure}[h!]
       \centering
@@ -302,49 +308,23 @@ Acknowledgments go here.
     
     Plotting the inferred joint positions frame by frame revealed the culprit - perspective!
     The machine learning model used for joint position extraction is finding extra movement in the depth axis of the video, and attributing it to roll in the elbow axis, instead of flexion.
-    This is clearly shown in fig \ref{fig:phantom_flex}.
+    This is clearly shown in \autoref{fig:phantom_flex}.
 
     \begin{figure}[h!]
       \centering
-      \includegraphics[scale=0.5]{images/elbow_flex_error.png}
-      \caption{Top view of inferred \(3\)D joint positions.}
+      \includegraphics[width=0.8\linewidth]{images/frontperspective.png}
+      \includegraphics[width=0.8\linewidth]{images/topdown_perspective.png}
+      \caption{Front and top view of inferred \(3\)D joint positions.}
       \label{fig:phantom_flex}
     \end{figure}
 
     To analyse the performance of joint angle tracking in the three dimensional case, a simple movement path is created. 
-    A 7 DoF manipulator is created from the DH parameters in table \ref{tab:dh_parameters}.
+    A 7 DoF manipulator is created from relevant DH parameters (specifics found in appendix \autoref{tab:dh_parameters})
     These movements are then fed through a forward kinematics processing program to obtain a visualisation of this movement path, and this movement is recreated by the subject.
     
     This path is shown in \ref{fig:threed_motion}.
     This movement has been selected to be easily recreated, whilst showing movement in three different joint angles simultaneously. 
     The same data processing for the two dimensional elbow flex case is used to obtain RMSE of three different joint angle movements.
-
-
-    \begin{table}[h]
-      \centering
-      \small
-      \begin{tabular}{>{\centering\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}}
-      \toprule
-      \textbf{Joint} & \textbf{Description} & \(\boldsymbol{\theta_i}\) & \(\boldsymbol{\alpha_i}\) & \(\boldsymbol{d_i}\) & \(\boldsymbol{a_i}\) \\
-      \midrule
-      1 & Shoulder abduction/adduction & \(q_1\) & \(\frac{\pi}{2}\) & 0 & 0 \\
-      \midrule
-      2 & Shoulder flexion/extension & \(q_2\) & \(\frac{\pi}{2}\) & 0 & 0 \\
-      \midrule
-      3 & Shoulder rotation & \(q_3\) & \(-\frac{\pi}{2}\) & 0 & \(L_u\) \\
-      \midrule
-      4 & Elbow flexion/extension & \(q_4\) & \(\frac{\pi}{2}\) & 0 & 0 \\
-      \midrule
-      5 & Forearm rotation & \(q_5\) & \(-\frac{\pi}{2}\) & 0 & \(L_l\) \\
-      \midrule
-      6 & Wrist flexion/extension & \(q_6\) & \(\frac{\pi}{2}\) & 0 & 0 \\
-      \midrule
-      7 & Wrist radial/ulnar deviation & \(q_7\) & 0 & 0 & 0 \\
-      \bottomrule
-      \end{tabular}
-      \caption{Denavit-Hartenberg Parameters for 7-DoF Arm (where \(L_u\) is upper arm length and \(L_l\) is lower arm length)}
-      \label{tab:dh_parameters}
-    \end{table}
 
   \begin{figure}[h!]
       \centering
@@ -435,28 +415,30 @@ Acknowledgments go here.
     Likewise, to ensure fairness between each method in both pick and place tasks, seeded randomness will be used to ensure that both methods get the same trial spawn position.
 
     \begin{figure}[h!]
-    \centering
-    \begin{subfigure}{0.3\linewidth}
-        \includegraphics[width=\linewidth]{images/approach.png}
-        \label{fig:image1}
-    \end{subfigure}
-    \begin{subfigure}{0.3\linewidth}
-        \includegraphics[width=\linewidth]{images/grip.png}
-        \label{fig:image2}
-    \end{subfigure}
+      \centering
+      \begin{subfigure}{0.3\linewidth}
+          \includegraphics[width=\linewidth]{images/approach.png}
+          \label{fig:image1}
+      \end{subfigure} 
+      \hspace{0.75em}
+      \begin{subfigure}{0.3\linewidth}
+          \includegraphics[width=\linewidth]{images/grip.png}
+          \label{fig:image2}
+      \end{subfigure}
 
-    \begin{subfigure}{0.3\linewidth}
-        \includegraphics[width=\linewidth]{images/carry.png}
-        \label{fig:image3}
-    \end{subfigure}
-    \begin{subfigure}{0.3\linewidth}
-        \includegraphics[width=\linewidth]{images/place.png}
-        \label{fig:image4}
-    \end{subfigure}
+      \begin{subfigure}{0.3\linewidth}
+          \includegraphics[width=\linewidth]{images/carry.png}
+          \label{fig:image3}
+      \end{subfigure}
+      \hspace{0.75em}
+      \begin{subfigure}{0.3\linewidth}
+          \includegraphics[width=\linewidth]{images/place.png}
+          \label{fig:image4}
+      \end{subfigure}
 
-    \caption{Phases of the pick and place scenario}
-    \label{fig:pickandplacephases}
-  \end{figure}
+      \caption{Phases of the pick and place scenario}
+      \label{fig:pickandplacephases}
+    \end{figure}
   
   \subsection{Scenario 1: Random position matching task}
   \label{sec:scen1}
@@ -477,7 +459,7 @@ Acknowledgments go here.
 	\subsection{Scenario 2: Simple environment pick and place task}
   \label{sec:scen2}
 
-  The pose estimation algorithm shows \(60.3 \%\) reduction in time over the controller control in this task, with the noticeable difference being in the proportion of time spent in the 'approach' phase (see fig \ref{fig:experiment2res})
+  The pose estimation algorithm shows \(60.3 \%\) reduction in time over the controller control in this task, with the noticeable difference being in the proportion of time spent in the 'approach' phase (see \autoref{fig:experiment2res})
   The controller method requires the operator to orient the gripper over the object, and doing this in certain arm positions can lead to singularities in the inverse kinematics solver, hence the longer time.
   
   These singularities can be seen in a joint angle over time plot of one of the experiments in \autoref{fig:singularities}.
@@ -526,11 +508,10 @@ Acknowledgments go here.
 %%%%%%%%%%%%%%%%%% CONCLUSIONS %%%%%%%%%%%%%%%%%%
 \section{Conclusions and future work} % edit subsection heading as appropriate
 \label{sec:conc}
-    \subsection{Conclusions}
-	% \lipsum[1]
+  \subsection{Conclusions}
 	
+
 	\subsection{Future work}
-    % \lipsum[1-2] \cite{ref:jCAS10,ref:jCAS09,ref:jCAS09a} \lipsum[3-5]
 
 
 
@@ -546,7 +527,36 @@ Acknowledgments go here.
     Project outline as submitted at the start of the project is a required appendix. Put here. 
     
     \section{Risk assessment}
-    Risk assessment is a required appendix. Put here.
+    Risk assessment is a required appendix. Put here.\
+
+    \section{DH Parameters}
+    The DH parameters used for the arm are as follows:
+
+    \begin{table}[h]
+      \centering
+      \small
+      \begin{tabular}{>{\centering\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}}
+      \toprule
+      \textbf{Joint} & \textbf{Description} & \(\boldsymbol{\theta_i}\) & \(\boldsymbol{\alpha_i}\) & \(\boldsymbol{d_i}\) & \(\boldsymbol{a_i}\) \\
+      \midrule
+      1 & Shoulder abduction/adduction & \(q_1\) & \(\frac{\pi}{2}\) & 0 & 0 \\
+      \midrule
+      2 & Shoulder flexion/extension & \(q_2\) & \(\frac{\pi}{2}\) & 0 & 0 \\
+      \midrule
+      3 & Shoulder rotation & \(q_3\) & \(-\frac{\pi}{2}\) & 0 & \(L_u\) \\
+      \midrule
+      4 & Elbow flexion/extension & \(q_4\) & \(\frac{\pi}{2}\) & 0 & 0 \\
+      \midrule
+      5 & Forearm rotation & \(q_5\) & \(-\frac{\pi}{2}\) & 0 & \(L_l\) \\
+      \midrule
+      6 & Wrist flexion/extension & \(q_6\) & \(\frac{\pi}{2}\) & 0 & 0 \\
+      \midrule
+      7 & Wrist radial/ulnar deviation & \(q_7\) & 0 & 0 & 0 \\
+      \bottomrule
+      \end{tabular}
+      \caption{Denavit-Hartenberg Parameters for 7-DoF Arm (where \(L_u\) is upper arm length and \(L_l\) is lower arm length)}
+      \label{tab:dh_parameters}
+    \end{table}
     
     %\subsection{Other appendices as necessary}
 \end{uomappendix}
