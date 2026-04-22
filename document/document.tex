@@ -210,16 +210,23 @@ Acknowledgments go here.
     In order to compare the final system to existing systems and research, desired characteristics must be identified.
     
     \begin{description}
-      \item[Accuracy requirements] - Experienced surgeons have been measured to have \(5 \degree\) of vertical movement range on all joints when asked to hold their hand on a target, and close to \(3 \degree\) range for horizontal movement \cite{ref:movementrange}.
+      \item[Accuracy requirements] - Be able to measure joint rotations with a minimum resolution of \(3 \degree\). 
+      
+      Experienced surgeons have been measured to have \(5 \degree\) of vertical movement range on all joints when asked to hold their hand on a target, and close to \(3 \degree\) range for horizontal movement \cite{ref:movementrange}.
       Therefore any measurement lower than this resolution can be characterised as 'noise' from human inaccuracy, and can be smoothed out.
-      \item[Latency requirements] - Teleoperation task performance generally degrades around the two key figures of \(600 \text{ ms}\) and \(1500 \text{ ms}\) \cite{ref:teleoplatency}.
+      \item[Latency requirements] - Have a maximum system latency of \(300 \text{ ms}\). 
+      
+      Teleoperation task performance generally degrades around the two key figures of \(600 \text{ ms}\) and \(1500 \text{ ms}\) \cite{ref:teleoplatency}.
       Thus, the Nyquist criterion equivalent of this threshold is used as a well informed estimate of how much latency can be present in the system, leaving a final requirement of \(300 \text{ ms}\).
-      \item[Resource requirements] - The budget for this project is \(£180\), and \(30\) unit credits worth of time, equating to \(240\) hours of time commitment.
-      Both of these factors will mean that the final solution favours simpler, more complete solutions - anything novel is a potential failure point that could mean the project does not complete.  
+      
+      \item[Resource requirements] -  The budget for this project is \(£180\), and \(30\) unit credits worth of time, equating to \(240\) hours of time commitment.
+      
+      Both of these factors will mean that the final solution favours simpler, more complete solutions. 
+      Anything novel is a potential failure point that could mean the project does not complete.  
     \end{description}
 
   \subsection{Survey of existing tracking technologies}
-    In order to fully evaluate the myriad of arm tracking methods available, a Pugh Matrix has been created to evaluate and compare several factors between each method.
+    In order to fully evaluate the myriad of arm tracking methods available, a Pugh Matrix has been created (see \autoref{tab:pugh_matrix_detailed}) to evaluate and compare several factors between each method.
     Each method will score \(1 - 5\) in each category, with a brief comment justifying the score in each column.
     
     Below are the decision factors of the Pugh Matrix and a brief description of how they are scored: \begin {description}
@@ -228,8 +235,18 @@ Acknowledgments go here.
       \item \textbf{Accuracy} - This is calculated from available research on the accuracy of this method. Each multiple of \(5 \degree\) above \(5 \degree\) reduces the score by \(1\), e.g. an absolute accuracy of \(6 - 10 \degree\) would score \(4\), \(11 - 15 \degree\) would score \(3\).
       \item \textbf{Latency} - This is calculated from available research on the time it takes to obtain a single measurement of all 7 joint angles from this method. Each multiple of \(100 \text{ ms}\) above \(300 \text{ ms}\) reduces the score by \(1\), e.g. a latency of \(301 \text{ ms} - 400 \text{ ms}\) would score \(4\).
     \end{description}
+
+    Analysis of existing methods shows that the two computer vision approaches score similarly in terms of viability, therefore further analysis will be required to confirm the viability of each method.
+    These will be performed in the form of accuracy and latency experiments.
+    This has the advantage of being able to examine more factors than existing literature - of particular interest is the accuracy of measuring multiple joints angles simultaneously.
+    
+    In particular, the potential accuracy advantage of the marker tracking method makes it more appealing, though this is offset by the stupendous cost of conventional Vicon camera systems.
+    However, open source software along with ArUco markers could be used to offset this cost - which is worth exploring before committing to any substantial development.
+    For example, \citeauthor{ref:arucomarkers} describes using ArUco markers along with standard home cameras to perform specialised kinematic analysis \cite{ref:arucomarkers}.
+    
     \begin{table}[h]
       \centering
+      \caption{Pugh Matrix with detailed scoring justifications}
       \small
       \begin{tabular}{>{\raggedright\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{1.8cm}|>{\centering\arraybackslash}p{1.8cm}|>{\centering\arraybackslash}p{1.8cm}|>{\centering\arraybackslash}p{1.8cm}|c}
       \toprule
@@ -248,18 +265,9 @@ Acknowledgments go here.
        & \(150 \text{ hours}\) & £40-60 & \(10\degree\) \cite{ref:bendaccuracy} & \(\le 100 \text{ ms}\) & \\
       \bottomrule
       \end{tabular}
-      \caption{Pugh Matrix with detailed scoring justifications}
       \label{tab:pugh_matrix_detailed}
     \end{table}
 
-    Analysis of existing methods shows that the two computer vision approaches score similarly in terms of viability, therefore further analysis will be required to confirm the viability of each method.
-    These will be performed in the form of accuracy and latency experiments.
-    This has the advantage of being able to examine more factors than existing literature - of particular interest is the accuracy of measuring multiple joints angles simultaneously.
-    
-    In particular, the potential accuracy advantage of the marker tracking method makes it more appealing, though this is offset by the stupendous cost of conventional Vicon camera systems.
-    However, open source software along with ArUco markers could be used to offset this cost - which is worth exploring before committing to any substantial development.
-    For example, \citeauthor{ref:arucomarkers} describes using ArUco markers along with standard home cameras to perform specialised kinematic analysis \cite{ref:arucomarkers}.
-  
 %%%%%%%%%%%%%%%%%% METHODS %%%%%%%%%%%%%%%%%%
 % \pagebreak
 \section{Comparing two viable computer vision based methods of robot arm teleoperation} \label{sec:methods}
@@ -294,10 +302,10 @@ This section aims to develop a minimum viable product (MVP) version of both meth
     This creates enough samples to perform ANOVA between each video, to maintain experimental integrity.
     In order to measure error, the graph of elbow flexion angles is extended towards the \(90 \degree\) and \(180 \degree\) endpoints.
     This secondary graph is then subtracted from the first graph to obtain the error value, from which we can calculate the root mean square error, and is shown in \autoref{fig:elbow_flex_example}.
-    
-    \begin{figure}[h!]
+
+    \begin{figure}[!htb]
       \centering
-      \includegraphics[width=\linewidth]{images/elbow_flex_graph.png}
+      \includegraphics[width=0.8\linewidth]{images/elbow_flex_graph_v2.png}
       \caption{Showing how RMSE is calculated from elbow flexion data.}
       \label{fig:elbow_flex_example}
     \end{figure}
@@ -310,33 +318,34 @@ This section aims to develop a minimum viable product (MVP) version of both meth
     The machine learning model used for joint position extraction is finding extra movement in the depth axis of the video, and attributing it to roll in the elbow axis, instead of flexion.
     This is clearly shown in \autoref{fig:phantom_flex}.
 
-    \begin{figure}[h!]
-      \centering
-      \includegraphics[width=0.8\linewidth]{images/frontperspective.png}
-      \includegraphics[width=0.8\linewidth]{images/topdown_perspective.png}
-      \caption{Front and top view of inferred \(3\)D joint positions.}
-      \label{fig:phantom_flex}
-    \end{figure}
-
     To analyse the performance of joint angle tracking in the three dimensional case, a simple movement path is created. 
     A 7 DoF manipulator is created from relevant DH parameters (specifics found in appendix \autoref{tab:dh_parameters})
     These movements are then fed through a forward kinematics processing program to obtain a visualisation of this movement path, and this movement is recreated by the subject.
     
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.7\linewidth]{images/frontperspective.png}
+      \includegraphics[width=0.7\linewidth]{images/topdown_perspective.png}
+      \caption{Front and top view of inferred \(3\)D joint positions.}
+      \label{fig:phantom_flex}
+    \end{figure}
+
     This path is shown in \ref{fig:threed_motion}.
     This movement has been selected to be easily recreated, whilst showing movement in three different joint angles simultaneously. 
     The same data processing for the two dimensional elbow flex case is used to obtain RMSE of three different joint angle movements.
 
-  \begin{figure}[h!]
-      \centering
-      \includegraphics[scale=0.5]{images/combination.png}
-      \caption{3D Joint Motion Path}
-      \label{fig:threed_motion}
-  \end{figure}
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[scale=0.5]{images/combination.png}
+        \caption{3D Joint Motion Path}
+        \label{fig:threed_motion}
+    \end{figure}
 
   \subsection{Results of joint angle tracking methods}
     Table \ref{tab:rmse_comparison} shows the compiled RMSE errors for tracking each joint in both the two dimension elbow flexing case and the three dimension movement path.
 
     \begin{table}[h]
+      \label{tab:rmse_comparison}
       \centering
       \small
       \begin{tabular}{>{\raggedright\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}}
@@ -345,26 +354,14 @@ This section aims to develop a minimum viable product (MVP) version of both meth
       \midrule
       Pose estimation & 25.83 & 7.19 & 6.89 & 11.68 \\
       \midrule
-      Marker Tracking & & & & \\
+      Marker Tracking & N/A & N/A & N/A & N/A \\
       \bottomrule
       \end{tabular}
-      \caption{RMSE Error Comparison for Different Tracking Methods}
-      \label{tab:rmse_comparison}
+      \caption{RMSE error of either tracking method}
     \end{table}
 
     Whilst the two dimensional RMSE error is larger than the literature suggests, the three dimensional joint error shows better accuracy than expected.
-    Apart from the shoulder adduction/abduction measurements, each joint being tracked is close to the \(5 \degree\) requirements of the project.
-    
-    An interesting aspect that was encountered when performing the accuracy characterisation experiments with pose estimation is shown in \autoref{fig:weezered}, and points to a downside not immediately apparent.
-    The program uses machine learning to create an estimation of joint locations in an image and was ostensibly trained on a large corpus of human images.
-    Hence, there was trouble distinguishing between real humans and pictures of humans being worn on the subject's clothing - a downside in the favour of the marker tracking method.
-
-    \begin{figure}[h!]
-      \centering
-      \includegraphics[scale=0.8]{images/weezered.png}
-      \caption{Pose estimation software mistaking a picture of humans printed on the clothing for an actual person.}
-      \label{fig:weezered}
-    \end{figure}
+    Apart from the shoulder adduction/abduction measurements, each joint being tracked is almost in the same order of magnitude of the \(3 \degree\) requirements of the project.
       
     Despite various attempts, ArUco marker tracking seemed to be too unstable in this specific application. 
     Both 2D paper markers and 3D printed markers were used, though the glossy surface finish of either meant that tracking was unreliable at close distances and impossible at moderate distances.
@@ -378,6 +375,17 @@ This section aims to develop a minimum viable product (MVP) version of both meth
       \includegraphics[width=\linewidth]{images/measuredrollangle.png}
       \caption{Measured vs Expected graph of pitch of ArUco marker}
       \label{fig:arucomarkerresults}
+    \end{figure}
+
+    An interesting aspect that was encountered when performing the accuracy characterisation experiments with pose estimation is shown in \autoref{fig:weezered}, and points to a downside not immediately apparent.
+    The program uses machine learning to create an estimation of joint locations in an image and was ostensibly trained on a large corpus of human images.
+    Hence, there was trouble distinguishing between real humans and pictures of humans being worn on the subject's clothing - a downside in the favour of the marker tracking method.
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[scale=0.8]{images/weezered.png}
+      \caption{Pose estimation software mistaking a picture of humans printed on the clothing for an actual person.}
+      \label{fig:weezered}
     \end{figure}
 
   \subsection{Final Tracking Method}

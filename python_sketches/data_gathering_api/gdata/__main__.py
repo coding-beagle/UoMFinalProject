@@ -2296,9 +2296,14 @@ def plot_comparison(
                     label=f"Outliers ({outlier_count})",
                     zorder=5,
                 )
-        ax1.set_ylabel("Angle (degrees)")
-        ax1.set_title(f"Original {joint_column} Motion")
-        ax1.legend()
+
+        title_size = 20
+        y_size = 12
+        legend_size = {"size": 15}
+
+        ax1.set_ylabel("Angle (degrees)", fontsize=y_size)
+        ax1.set_title(f"Original {joint_column} Motion", fontsize=title_size)
+        ax1.legend(loc="upper right", prop=legend_size)
         ax1.grid(True, alpha=0.3)
 
         # Plot transformed
@@ -2309,9 +2314,9 @@ def plot_comparison(
             linewidth=2,
             color="orange",
         )
-        ax2.set_ylabel("Angle (degrees)")
-        ax2.set_title(f"Transformed {joint_column} Motion")
-        ax2.legend()
+        ax2.set_ylabel("Angle (degrees)", fontsize=y_size)
+        ax2.set_title(f"Transformed {joint_column} Motion", fontsize=title_size)
+        ax2.legend(loc="upper right", prop=legend_size)
         ax2.grid(True, alpha=0.3)
 
         # Plot difference
@@ -2328,10 +2333,12 @@ def plot_comparison(
         )
         ax3.axhline(y=0, color="black", linestyle="--", linewidth=1, alpha=0.5)
         ax3.fill_between(result_df["frame"], 0, difference, alpha=0.3, color="red")
-        ax3.set_xlabel("Frame")
-        ax3.set_ylabel("Angle Difference (degrees)")
-        ax3.set_title("Difference Between Transformed and Original")
-        ax3.legend()
+        ax3.set_xlabel("Frame", fontsize=y_size)
+        ax3.set_ylabel("Angle Difference (degrees)", fontsize=y_size)
+        ax3.set_title(
+            "Difference Between Transformed and Original", fontsize=title_size
+        )
+        ax3.legend(loc="upper right", prop=legend_size)
         ax3.grid(True, alpha=0.3)
 
         # Color-code motion phases on all plots
