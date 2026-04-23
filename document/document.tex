@@ -117,9 +117,21 @@
 
 %%%%%%%%%%%%%%%%%% ABSTRACT %%%%%%%%%%%%%%%%%%
 \begin{abstract} % put abstract here.
-  Robot arms have been purposefully engineered to mimic the dexterity of human arms, yet they are not always controlled as such.
-  In some cases, research has been undertaken to explore the performance impact of mapping the end effector of the robot arm to the operator's hand, with some cases of performance benefits.
-  This project aims to explore the most appropriate method to crea
+  Robot arms have been engineered to mimic the dexterity of human arms, yet conventional joystick control methods do not make full use of this.
+  Prior research has been undertaken to explore the performance impact of mapping the end effector of the robot arm to the operator's hand, with demonstrated performance benefits.
+  This project aims to explore whether full mapping of an operator's arm movements to control an industrial robot with laterally mounted arms (YuMi) results in similar performance benefits.
+  
+  Secondary research is performed to sort viable approaches, two of which are found to be equally plausible: pose estimation with a neural network (MediaPipe) as well as computer vision based marker tracking (ArUco). 
+  To distinguish these two methods, a minimum viable version of each is implemented and then an experiment is devised to find the most suitable method.
+  The ArUco markers showed a low detection rate, whereas pose estimation had some depth-axis related distortion but was able to show sufficient angle tracking accuracy with 3D movements.
+  Hence, the pose estimation approach is further developed to interface with a robot simulation.
+
+  In practice, the joystick approach is \(42 \%\) faster on average on a task that involves moving the end effector to a random position in the workspace.
+  Pose estimation is faster than joystick control by \(60.3 \%\) in a scenario involving grabbing an object in one location and moving it to a target destination.
+  In a similar scenario involving an obstacle field, the pose estimation solution is \(57.2 \%\) faster and has \(3\) fewer collisions on average.
+  
+  These findings are due to the higher information density and intuition of the pose estimation control method - and limitations of typical inverse kinematic solvers hindering the joystick method.
+  Likewise, the results are from a sample size of \(1\) operator, and therefore are not fully representative of generalised performance benefits.
 \end{abstract}%
 \clearpage
 
@@ -166,7 +178,7 @@ Finally, an uncountable amount of thanks goes to my father for granting me the w
 
   \subsection{Background and motivation}
   The motivation for this project comes from articles within the books: \citetitle{ref:Zhou_Yang_Wang_Dong_2025} \cite{ref:Zhou_Yang_Wang_Dong_2025} and \citetitle{ref:Lyu_Yang_Yang_2025} \cite{ref:Lyu_Yang_Yang_2025}.
-  Both of these articles use an inertial measurment unit (IMU) to gather data, but only maps the wrist position to the robot's end effector.
+  Both of these articles use an inertial measurement unit (IMU) to gather data, but only maps the wrist position to the robot's end effector.
 
   Redundancy in the degrees of freedom of the arm means that a valid end effector position can have multiple positions of the previous links \cite{ref:nullspace}.
   Therefore this ambiguity could lead to collisions with obstacles in the environment, and lack of safety for people within the envelope of the robot arm. 
@@ -199,7 +211,7 @@ Finally, an uncountable amount of thanks goes to my father for granting me the w
 \label{sec:litrev}
 
   \subsection{Why choose teleoperation over conventional input methods}
-    The measurement of human arm joint angles has been an interest of academia for several decades: with one of the first examples being demonstrated by \citeauthor{ref:videobasedumanmotioncapture}. 
+    The measurement of human arm joint angles has been an interest of academia for several decades: with one of the first examples being demonstrated by \citeauthor{ref:videobasedumanmotioncapture}, \cite{ref:videobasedumanmotioncapture}. 
     In industrial settings, full body tracking has primarily been used in the film industry to accurately measure an actor's performance \cite{ref:mocapwhy} and map them onto computer generated characters \cite{ref:whatmocap}.
     
     This approach could also be applied to the control of robotics: have a skilled operator remotely control industrial robots where traditional control methods (e.g. joysticks) are unsuitable.

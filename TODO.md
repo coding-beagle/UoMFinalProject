@@ -1,8 +1,8 @@
 Todo for 23/04/26
 
 - [x] Clean up readme
-- [x] Add necessary parts to appendix
-- [ ] Write abstract
+- [x] Add necessary parts to appendix\
+- [x] Write abstract
 - [ ] Remake Fig 12
 - [ ] Remake Fig 13
 - [x] Write 5
