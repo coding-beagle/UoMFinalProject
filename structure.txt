@@ -1,0 +1,49 @@
+Folder PATH listing for volume Software and Code
+Volume serial number is FAC9-021D
+S:.
+├─assets
+├─coppeliasimScenes
+├─datasets
+│  ├─pose_estimation
+│  └─pose_estimation_imgs
+├─deliverables
+│  ├─proposal_document
+│  │  └─images
+│  └─proposal_imgs
+├─document
+│  └─images
+├─imgs
+├─Meeting Logs
+├─Meeting Presentations
+└─python_sketches
+    ├─coppeliacontrol
+    │  ├─controllerObstacleResults
+    │  ├─controllerReachResults
+    │  │  └─reach_results_sitting_in_front_of_monitor
+    │  ├─controllerTransportResults
+    │  ├─poseEstimationObstacleResults
+    │  ├─poseEstimationReachResults
+    │  ├─poseEstimationTransportResults
+    │  ├─utils
+    │  │  └─__pycache__
+    │  └─__pycache__
+    ├─cv_experiments
+    ├─data_gathering_api
+    │  ├─.pytest_cache
+    │  │  └─v
+    │  │      └─cache
+    │  ├─gdata
+    │  │  ├─mediapipe_wrapper
+    │  │  │  └─__pycache__
+    │  │  ├─plotter
+    │  │  │  └─__pycache__
+    │  │  ├─utils
+    │  │  │  └─__pycache__
+    │  │  └─__pycache__
+    │  ├─gdata.egg-info
+    │  ├─init_test
+    │  └─Tests
+    │      └─__pycache__
+    ├─pose_estimation_basics
+    │  └─Human-Pose-Estimation-using-Opencv
+    └─random_misc

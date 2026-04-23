@@ -619,64 +619,52 @@
       \verb 10.1145/3651993
       \endverb
     \endentry
-    \entry{ref:imuerror}{article}{}
-      \name{author}{3}{}{%
-        {{hash=13fe30618a231e4038369248467c2abf}{%
-           family={Ricci},
-           familyi={R\bibinitperiod},
-           given={Luca},
-           giveni={L\bibinitperiod}}}%
-        {{hash=45b3af9c3e66371b8e0d6111802cd318}{%
-           family={Taffoni},
-           familyi={T\bibinitperiod},
-           given={Fabrizio},
-           giveni={F\bibinitperiod}}}%
-        {{hash=59fdc9d5393484838f77e1e07c237734}{%
-           family={Formica},
-           familyi={F\bibinitperiod},
-           given={Domenico},
-           giveni={D\bibinitperiod}}}%
+    \entry{ref:arucomarkers}{article}{}
+      \name{author}{5}{}{%
+        {{hash=c7d6b11403d0f9980d3a5369210c8422}{%
+           family={Wieczorek},
+           familyi={W\bibinitperiod},
+           given={Bartosz},
+           giveni={B\bibinitperiod}}}%
+        {{hash=63951082248b8fd386bc3dc7ed61dcf4}{%
+           family={Warguła},
+           familyi={W\bibinitperiod},
+           given={Łukasz},
+           giveni={Ł\bibinitperiod}}}%
+        {{hash=6a279c3addb415da7f43c7afa975c733}{%
+           family={Kukla},
+           familyi={K\bibinitperiod},
+           given={Mateusz},
+           giveni={M\bibinitperiod}}}%
+        {{hash=8511149f1294c42c2e21edc24beb22b2}{%
+           family={Kubacki},
+           familyi={K\bibinitperiod},
+           given={Arkadiusz},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2f1df46da409a58db0584043e344bc6e}{%
+           family={Górecki},
+           familyi={G\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
       }
-      \strng{namehash}{60b49cbc1e2e0693278dbdbe72d6c204}
-      \strng{fullhash}{a6255e1015f901c443dbdd079997489b}
-      \strng{bibnamehash}{a6255e1015f901c443dbdd079997489b}
-      \strng{authorbibnamehash}{a6255e1015f901c443dbdd079997489b}
-      \strng{authornamehash}{60b49cbc1e2e0693278dbdbe72d6c204}
-      \strng{authorfullhash}{a6255e1015f901c443dbdd079997489b}
+      \strng{namehash}{ba1397c4a219f577db4de433ec96c982}
+      \strng{fullhash}{633662f0e4f31768ee1e3c91a248dac1}
+      \strng{bibnamehash}{ba1397c4a219f577db4de433ec96c982}
+      \strng{authorbibnamehash}{ba1397c4a219f577db4de433ec96c982}
+      \strng{authornamehash}{ba1397c4a219f577db4de433ec96c982}
+      \strng{authorfullhash}{633662f0e4f31768ee1e3c91a248dac1}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{PLOS ONE}
-      \field{month}{9}
-      \field{number}{9}
-      \field{title}{On the orientation error of IMU: Investigating static and dynamic accuracy targeting human motion}
-      \field{volume}{11}
-      \field{year}{2016}
+      \field{journaltitle}{Technical Transactions}
+      \field{title}{The effects of ARUCO marker velocity and size on motion capture detection and accuracy in the context of human body kinematics analysis}
+      \field{year}{2020}
+      \field{pages}{1\bibrangedash 10}
+      \range{pages}{10}
       \verb{doi}
-      \verb 10.1371/journal.pone.0161940
+      \verb 10.37705/techtrans/e2020036
       \endverb
-    \endentry
-    \entry{ref:imudatasheet}{manual}{}
-      \name{author}{1}{}{%
-        {{hash=f0c935e19df953b803d7dbe46444a5eb}{%
-           family={InvenSense},
-           familyi={I\bibinitperiod},
-           given={TDK},
-           giveni={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{f0c935e19df953b803d7dbe46444a5eb}
-      \strng{fullhash}{f0c935e19df953b803d7dbe46444a5eb}
-      \strng{bibnamehash}{f0c935e19df953b803d7dbe46444a5eb}
-      \strng{authorbibnamehash}{f0c935e19df953b803d7dbe46444a5eb}
-      \strng{authornamehash}{f0c935e19df953b803d7dbe46444a5eb}
-      \strng{authorfullhash}{f0c935e19df953b803d7dbe46444a5eb}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{ICM-20948 Datasheet}
-      \field{year}{2017}
     \endentry
     \entry{ref:cverror}{article}{}
       \name{author}{5}{}{%
@@ -782,6 +770,65 @@
       \verb 10.1007/s00138-002-0096-8
       \endverb
     \endentry
+    \entry{ref:imuerror}{article}{}
+      \name{author}{3}{}{%
+        {{hash=13fe30618a231e4038369248467c2abf}{%
+           family={Ricci},
+           familyi={R\bibinitperiod},
+           given={Luca},
+           giveni={L\bibinitperiod}}}%
+        {{hash=45b3af9c3e66371b8e0d6111802cd318}{%
+           family={Taffoni},
+           familyi={T\bibinitperiod},
+           given={Fabrizio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=59fdc9d5393484838f77e1e07c237734}{%
+           family={Formica},
+           familyi={F\bibinitperiod},
+           given={Domenico},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{60b49cbc1e2e0693278dbdbe72d6c204}
+      \strng{fullhash}{a6255e1015f901c443dbdd079997489b}
+      \strng{bibnamehash}{a6255e1015f901c443dbdd079997489b}
+      \strng{authorbibnamehash}{a6255e1015f901c443dbdd079997489b}
+      \strng{authornamehash}{60b49cbc1e2e0693278dbdbe72d6c204}
+      \strng{authorfullhash}{a6255e1015f901c443dbdd079997489b}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{PLOS ONE}
+      \field{month}{9}
+      \field{number}{9}
+      \field{title}{On the orientation error of IMU: Investigating static and dynamic accuracy targeting human motion}
+      \field{volume}{11}
+      \field{year}{2016}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0161940
+      \endverb
+    \endentry
+    \entry{ref:imudatasheet}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=f0c935e19df953b803d7dbe46444a5eb}{%
+           family={InvenSense},
+           familyi={I\bibinitperiod},
+           given={TDK},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{f0c935e19df953b803d7dbe46444a5eb}
+      \strng{fullhash}{f0c935e19df953b803d7dbe46444a5eb}
+      \strng{bibnamehash}{f0c935e19df953b803d7dbe46444a5eb}
+      \strng{authorbibnamehash}{f0c935e19df953b803d7dbe46444a5eb}
+      \strng{authornamehash}{f0c935e19df953b803d7dbe46444a5eb}
+      \strng{authorfullhash}{f0c935e19df953b803d7dbe46444a5eb}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ICM-20948 Datasheet}
+      \field{year}{2017}
+    \endentry
     \entry{ref:bendaccuracy}{article}{}
       \name{author}{1}{}{%
         {{hash=b468e34ceaa302469991a469f7bcc0de}{%
@@ -808,53 +855,6 @@
       \range{pages}{4}
       \verb{doi}
       \verb 10.1109/iwasi.2011.6004685
-      \endverb
-    \endentry
-    \entry{ref:arucomarkers}{article}{}
-      \name{author}{5}{}{%
-        {{hash=c7d6b11403d0f9980d3a5369210c8422}{%
-           family={Wieczorek},
-           familyi={W\bibinitperiod},
-           given={Bartosz},
-           giveni={B\bibinitperiod}}}%
-        {{hash=63951082248b8fd386bc3dc7ed61dcf4}{%
-           family={Warguła},
-           familyi={W\bibinitperiod},
-           given={Łukasz},
-           giveni={Ł\bibinitperiod}}}%
-        {{hash=6a279c3addb415da7f43c7afa975c733}{%
-           family={Kukla},
-           familyi={K\bibinitperiod},
-           given={Mateusz},
-           giveni={M\bibinitperiod}}}%
-        {{hash=8511149f1294c42c2e21edc24beb22b2}{%
-           family={Kubacki},
-           familyi={K\bibinitperiod},
-           given={Arkadiusz},
-           giveni={A\bibinitperiod}}}%
-        {{hash=2f1df46da409a58db0584043e344bc6e}{%
-           family={Górecki},
-           familyi={G\bibinitperiod},
-           given={Jan},
-           giveni={J\bibinitperiod}}}%
-      }
-      \strng{namehash}{ba1397c4a219f577db4de433ec96c982}
-      \strng{fullhash}{633662f0e4f31768ee1e3c91a248dac1}
-      \strng{bibnamehash}{ba1397c4a219f577db4de433ec96c982}
-      \strng{authorbibnamehash}{ba1397c4a219f577db4de433ec96c982}
-      \strng{authornamehash}{ba1397c4a219f577db4de433ec96c982}
-      \strng{authorfullhash}{633662f0e4f31768ee1e3c91a248dac1}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Technical Transactions}
-      \field{title}{The effects of ARUCO marker velocity and size on motion capture detection and accuracy in the context of human body kinematics analysis}
-      \field{year}{2020}
-      \field{pages}{1\bibrangedash 10}
-      \range{pages}{10}
-      \verb{doi}
-      \verb 10.37705/techtrans/e2020036
       \endverb
     \endentry
   \enddatalist
