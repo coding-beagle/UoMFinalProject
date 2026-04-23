@@ -331,7 +331,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
 
     Upon analysis of the RMSE, it was found that this value was \(25.83 \degree\).
     which was greater than the literature value of \(10.37 \degree\) \cite{ref:cverror}. 
-    Frame by frame analysis of the video showed that this descrepancy was not attributable to human error - the arm was clearly flexing and extending to the correct endpoints.
+    Frame by frame analysis of the video showed that this discrepancy was not attributable to human error - the arm was clearly flexing and extending to the correct endpoints.
     
     Plotting the inferred joint positions frame by frame revealed the culprit - perspective!
     The machine learning model used for joint position extraction is finding extra movement in the depth axis of the video, and attributing it to roll in the elbow axis, instead of flexion.
