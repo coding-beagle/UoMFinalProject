@@ -22,9 +22,11 @@ ArUco marker tracking and AI pose estimation via MediaPipe:
 
 Then CoppeliaSim was used to simulate a 7 DoF robot.
 
-This started with simple robot control:
+This started with implementing simple robot control:
 
 ![](/imgs/yumirobot.gif)
+
+![](/imgs/yumijoystickcontrol.gif)
 
 Where the arm tracking was gradually applied:
 
@@ -36,11 +38,13 @@ And then experiments were devised to measure performance against conventional jo
 
 ![](/imgs/yumiposetransport.gif)
 
-![](/imgs/yumijoystickcontrol.gif)
-
 ![](/imgs/yumijoystickdatagathering.gif)
 
 ## Repo Structure
+
+The structure for this repository is as follows.
+
+Good luck. I made this repo with the knowledge that I'll never have to touch any of this Terry Davis - forsaken code ever again.
 
 ```
 ├─assets                        // Miscellaneous assets used for meeting presentations
