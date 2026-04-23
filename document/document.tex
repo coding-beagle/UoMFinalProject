@@ -105,7 +105,7 @@
 \faculty{Science and Engineering}                  % "Faculty of" is added automatically
 \school{School of Engineering} % "School of" not added automatically (as if in AMBS, School comes at the end rather than the start), so enter full name of School here
 \submitdate{2026}                                  % regulations ask only for the year, not month
-\wordcount{1234}		                   % use \wordcount{} to set the count. Can just type in a number (e.g. \wordcount{1000}	if don't want to use the automatic count.) This is automatically displayed after the table of contents. 
+\wordcount{4395}		                   % use \wordcount{} to set the count. Can just type in a number (e.g. \wordcount{1000}	if don't want to use the automatic count.) This is automatically displayed after the table of contents. 
 \maketitle
 
 
@@ -126,9 +126,9 @@
   The ArUco markers showed a low detection rate, whereas pose estimation had some depth-axis related distortion but was able to show sufficient angle tracking accuracy with 3D movements.
   Hence, the pose estimation approach is further developed to interface with a robot simulation.
 
-  In practice, the joystick approach is \(42 \%\) faster on average on a task that involves moving the end effector to a random position in the workspace.
-  Pose estimation is faster than joystick control by \(60.3 \%\) in a scenario involving grabbing an object in one location and moving it to a target destination.
-  In a similar scenario involving an obstacle field, the pose estimation solution is \(57.2 \%\) faster and has \(3\) fewer collisions on average.
+  In practice, the joystick approach is \(42.1 \%\) faster on average on a task that involves moving the end effector to a random position in the workspace.
+  Pose estimation is faster than joystick control by \(24.4 \%\) in a scenario involving grabbing an object in one location and moving it to a target destination.
+  In a similar scenario maneuvering in an obstacle field, the pose estimation solution is \(26.7 \%\) faster and resulted in \(3.2\) fewer collisions on average.
   
   These findings are due to the higher information density and intuition of the pose estimation control method - and limitations of typical inverse kinematic solvers hindering the joystick method.
   Likewise, the results are from a sample size of \(1\) operator, and therefore are not fully representative of generalised performance benefits.
@@ -172,7 +172,7 @@ Finally, an uncountable amount of thanks goes to my father for granting me the w
   \begin{figure}[h!]
       \centering
       \includegraphics[scale=0.3]{images/yumi_two_arms.png}
-      \caption{YuMi Robot Arm To Be Used In Experiment}
+      \caption{YuMi Robot Arm To Be Used In Experiment.}
       \label{fig:yumi}
     \end{figure}
 
@@ -416,6 +416,8 @@ This section aims to develop a minimum viable product (MVP) version of both meth
       \label{fig:weezered}
     \end{figure}
 
+  \pagebreak
+
   \subsection{Final Tracking Method}
 
   Results show that the pose estimation model is not able to achieve the \(3 \degree\) required for the project, it is able to get within the same order of magnitude of accuracy.
@@ -454,7 +456,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
 
   \(100\) samples were taken, with \(10\) runs of \(10\) experiments. 
   Analysis of variance (ANOVA) shows no significant deviation between each set of experiments (see appendix \autoref{app:anova} for detailed ANOVA results).
-  The controller method was roughly \(42 \%\) faster than the pose estimation algorithm, although with a lower standard deviation of \(0.043\) compared to \(0.053\).
+  The controller method was \(42.1 \%\) faster than the pose estimation algorithm, although with a lower standard deviation of \(0.043\) compared to \(0.053\).
   
   The speed difference is likely attributable to the operator's familiarity of using controllers for other tasks.
   Notably, the difference in standard deviation could imply that pose estimation is stronger for tasks that require consistency, rather than outright speed.
@@ -477,11 +479,11 @@ This section aims to develop a minimum viable product (MVP) version of both meth
   To measure the performance of the pick and place task, the cumulative time spent in each phase is measured, along with the overall time to complete the task.
   Likewise, to ensure fairness between each method in both pick and place tasks, seeded randomness will be used to ensure that both methods get the same trial spawn position.
 
-  The pose estimation algorithm shows \(60.3 \%\) reduction in time over the controller control in this task, with the noticeable difference being in the proportion of time spent in the 'approach' phase (see \autoref{fig:experiment2res})
-  The controller method requires the operator to orient the gripper over the object, and doing this in certain arm positions can lead to singularities in the inverse kinematics solver, hence the longer time.
+  The pose estimation algorithm shows \(24.4 \%\) reduction in time over the controller control in this task, with the noticeable difference being in the proportion of time spent in the 'carry' phase (see \autoref{fig:experiment2res})
+  The controller method requires the operator to orient the gripper over the object, and doing this in certain arm positions can lead to unreachable positions from the inverse kinematics (IK) solver, hence the longer time.
   
-  These singularities can be seen in a joint angle over time plot of one of the experiments in \autoref{fig:singularities}.
-  The advantage of the pose estimation method is that the human arm of the operator acts as a safety net for unreachable positions.
+  A graph showing when the IK solver is unable to reach a position is shown in \autoref{fig:singularities}.
+  The advantage of the pose estimation method is that this failure mode is less common, since the joint limitation of the operator's arm generally matches the joint limits of the robot arm.
 
   \begin{figure}[h!]
     \centering
@@ -505,7 +507,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
         \label{fig:image4}
     \end{subfigure}
 
-    \caption{Phases of the pick and place scenario}
+    \caption{Phases of the pick and place scenario.}
     \label{fig:pickandplacephases}
   \end{figure}
 
@@ -519,7 +521,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
   \begin{figure}[h!]
     \centering
     \includegraphics[width=\linewidth]{images/jointangletime.png}
-    \caption{Joint angle over time plot of the robot arm during a controller experiment }
+    \caption{A snapshot of when the IK solver was failing over the simulation time.}
     \label{fig:singularities}
   \end{figure}
   
@@ -528,21 +530,26 @@ This section aims to develop a minimum viable product (MVP) version of both meth
 	\subsection{Scenario 3: Obstacle-rich environment pick and place task}
   \label{sec:scen3}
 
-  The pose estimation algorithm is quicker on average by \(57.2 \%\) in this task, likely for the same reasons as above - where the controller solution is running into singularities.
-  Additionally, the added dexterity shown led to \(3.46\) fewer collisions (\(4.14\) vs \(7.60\)) on average compared to the controller solution.
+  This scenario is the same as scenario 2, with the addition of a randomly generated obstacle field as shown in \autoref{fig:obstaclefield}.
+  The collision between any segment of the robot arm and these obstacles are counted, although there is no time penalty for a collision.
+
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/obstacle_field.png}
+    \caption{One of the obstacle fields generated for scenario 3.}
+    \label{fig:obstaclefield}
+  \end{figure}
+
+  The pose estimation algorithm is quicker on average by \(26.7 \%\) in this task, likely for the same reasons as above - where the controller solution is running into unsolvable positions.
+  Additionally, the added dexterity shown led to \(3.2\) fewer collisions (\(4.4\) vs \(7.6\)) on average compared to the controller solution.
 
   The fewer collisions may be due to more control that the operator has over the entire arm, as more data can be transmitted from the operator to the robot, in a way that is intuitive.
   Likewise, the smooth control of the pose estimation algorithm may make it more predictable compared to the IK approach of the controller solution - where it may be jumping over singularity positions unpredictably.
 
-  The proportion of time spent in the approach phase increased by \(9 \%\) for the pose estimation solution, and decreased by \(66.8 \%\) for the controller solution.
-  Interestingly, the controller solution becomes more balanced in the time spent in each movement phase, whereas the pose estimation solution becomes front loaded.
-
-  There is also a noticeable difference in the average trial time between scenario 3 and scenario 2, likely attributable to the operator becoming more skilled and experience with each control method and experiment.
-
   \begin{figure}[h!]
     \centering
-    \includegraphics[width=\linewidth]{images/obstacle_results.png}
-    \caption{Standard distribution plot of the results of either experiment}
+    \includegraphics[width=0.8\linewidth]{images/obstacle_results.png}
+    \caption{Standard distribution plot of the results of either experiment.}
     \label{fig:experiment3res}
   \end{figure}
 
@@ -554,11 +561,11 @@ This section aims to develop a minimum viable product (MVP) version of both meth
   This section summarises the major findings from the experiments carried out in the previous section, and provide several areas to be explored in future work.
   \subsection{Conclusions}
 	
-  The results of the experiments shows that in the arbitrary movement task, joystick control results in a \(42 \%\) faster average speed to reach a random position.
+  The results of the experiments shows that in the arbitrary movement task, joystick control results in a \(42.1 \%\) faster average speed to reach a random position.
   This could have been caused by multiple factors: the operator's proficiency with using joysticks previously, as well as intuitively the joystick control being more well suited to this task.
   It follows that the joystick is able to manipulate the end effector coordinates one axis at a time to reach the target position systematically, whereas it is harder to move a hand to an arbitrary position.
   
-  However, the use of pose estimation had increased performance in the two pick and place scenarios, having an average time of \(60.3 \%\) and \(57.2 \%\) respectively.
+  However, the use of pose estimation had increased performance in the two pick and place scenarios, being faster on average by \(24.44 \%\) and \(26.67 \%\) respectively.
   This is likely a combination of human intuition being more applicable, as well as a limitation of the inverse kinematics solver used for the joystick control.
   Simply, the pose estimation solution is able to deliver 7 degrees of control to the arm simultaneously and intuitively, compared to the abstraction required to manipulate the arm with a joystick.
 
@@ -668,6 +675,52 @@ This section aims to develop a minimum viable product (MVP) version of both meth
     
     \section{ANOVA Figures}\
     \label{app:anova}
+
+    \begin{verbatim}
+    Running ANOVA analysis for pose estimation results:
+
+    Pose Estimation — loading 10 file(s):
+    Good! Group A: reach_results_20260301_232316  [reach]  (n=8  μ=9.769s)
+    Good! Group A: reach_results_20260301_234021  [reach]  (n=7  μ=5.787s)
+    Good! Group A: reach_results_20260301_235136  [reach]  (n=7  μ=10.475s)
+    Good! Group A: reach_results_20260301_235234  [reach]  (n=9  μ=2.589s)
+    Good! Group A: reach_results_20260301_235402  [reach]  (n=10  μ=7.558s)
+    Good! Group A: reach_results_20260301_235622  [reach]  (n=8  μ=9.298s)
+    Good! Group A: reach_results_20260307_014934  [reach]  (n=6  μ=5.696s)
+    Good! Group A: reach_results_20260307_015112  [reach]  (n=8  μ=5.325s)
+    Good! Group A: reach_results_20260307_015228  [reach]  (n=10  μ=6.336s)
+    Good! Group A: reach_results_20260307_015437  [reach]  (n=7  μ=7.959s)
+    \end{verbatim}
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.6\linewidth]{images/anova_poseestimation.png}
+      \caption{Compound standard distribution plot of all 10 pose estimation runs.}
+      \label{fig:experiment3res}
+    \end{figure}
+
+    \begin{verbatim}
+    Running ANOVA analysis for controller results:
+
+    Controller — loading 10 file(s):
+    Good! Group A: reach_results_20260307_003628  [reach]  (n=10  μ=6.077s)
+    Good! Group A: reach_results_20260307_003835  [reach]  (n=8  μ=8.768s)
+    Good! Group A: reach_results_20260307_004001  [reach]  (n=8  μ=2.839s)
+    Good! Group A: reach_results_20260307_004142  [reach]  (n=9  μ=7.128s)
+    Good! Group A: reach_results_20260307_004240  [reach]  (n=10  μ=3.770s)
+    Good! Group A: reach_results_20260307_011713  [reach]  (n=8  μ=7.147s)
+    Good! Group A: reach_results_20260307_011850  [reach]  (n=9  μ=6.670s)
+    Good! Group A: reach_results_20260307_011956  [reach]  (n=10  μ=4.739s)
+    Good! Group A: reach_results_20260307_012253  [reach]  (n=8  μ=7.331s)
+    Good! Group A: reach_results_20260307_012436  [reach]  (n=10  μ=8.853s)
+    \end{verbatim}
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.6\linewidth]{images/anova_controller.png}
+      \caption{Compound standard distribution plot of all 10 controller runs.}
+      \label{fig:experiment3res}
+    \end{figure}
 
     %\subsection{Other appendices as necessary}
 \end{uomappendix}

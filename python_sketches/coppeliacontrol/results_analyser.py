@@ -1024,16 +1024,16 @@ def build_phase_figure():
                 pad=24,
             )
 
-    if n_pies == 2:
-        fig.text(
-            0.5,
-            0.43,
-            "Pie area ∝ average total trial duration",
-            ha="center",
-            fontsize=20,
-            color="#888888",
-            style="italic",
-        )
+    # if n_pies == 2:
+    # fig.text(
+    #     0.5,
+    #     0.43,
+    #     "Pie area ∝ average total trial duration",
+    #     ha="center",
+    #     fontsize=20,
+    #     color="#888888",
+    #     style="italic",
+    # )
 
     has_b_transport = any(gk == "B" for gk, _ in all_transport)
     group_keys_present = ["A"] + (["B"] if has_b_transport else [])
