@@ -104,7 +104,7 @@
                                                    % Our MSc courses are: Advanced Control and Systems Engineering, Advanced Control and Systems Engineering with Extended Research, Communications and Signal Processing, Communications and Signal Processing with Extended Research, Electrical Power Systems Engineering, Advanced Electrical Power Systems Engineering, Renewable Energy and Clean Technology, Renewable Energy and Clean Technology with Extended Research, Robotics, Robotics with Extended Research
 \faculty{Science and Engineering}                  % "Faculty of" is added automatically
 \school{School of Engineering} % "School of" not added automatically (as if in AMBS, School comes at the end rather than the start), so enter full name of School here
-\submitdate{2025}                                  % regulations ask only for the year, not month
+\submitdate{2026}                                  % regulations ask only for the year, not month
 \wordcount{1234}		                   % use \wordcount{} to set the count. Can just type in a number (e.g. \wordcount{1000}	if don't want to use the automatic count.) This is automatically displayed after the table of contents. 
 \maketitle
 
@@ -117,7 +117,9 @@
 
 %%%%%%%%%%%%%%%%%% ABSTRACT %%%%%%%%%%%%%%%%%%
 \begin{abstract} % put abstract here.
-  Abstract goes here.
+  Robot arms have been purposefully engineered to mimic the dexterity of human arms, yet they are not always controlled as such.
+  In some cases, research has been undertaken to explore the performance impact of mapping the end effector of the robot arm to the operator's hand, with some cases of performance benefits.
+  This project aims to explore the most appropriate method to crea
 \end{abstract}%
 \clearpage
 
@@ -135,7 +137,10 @@
 
 %%%%%%%%%%%%%%%%%% ACKNOWLEDGEMENTS %%%%%%%%%%%%%%%%%%
 \begin{uomacknowledgements}
-Acknowledgments go here.
+Thank you to Dr. Simon Watson who was able to provide invaluable feedback and guidance throughout the project.
+Thanks also to PepsiCo for providing the caffeine for me to get through many an 'early' 10:00 A.M. meeting with him.
+Gratitude is also directed towards Mike Oldfield for providing the soundtrack to many coding-laden evenings such that my mind would not have to suffer the silence of a cold Mancunian evening. 
+Finally, an uncountable amount of thanks goes to my father for granting me the world and more. 
 \end{uomacknowledgements}
 
 
@@ -150,7 +155,7 @@ Acknowledgments go here.
   
   The goal of this project is to create a system for controlling and teleoperating a robot arm with a human arm. 
   In order to maintain simplicity in the project scope, the robot arm is assumed to be shoulder-mounted and has the seven degrees of freedom (DoF) \cite{ref:arm_dofs}, matching that of a healthy human arm.
-  An example of the humanoid robot arm (the YuMi robot) is shown in figure \ref{fig:yumi}.
+  An example of the humanoid robot arm (the YuMi robot) to be used for this project is shown in \autoref{fig:yumi}.
 
   \begin{figure}[h!]
       \centering
@@ -330,7 +335,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
       \label{fig:phantom_flex}
     \end{figure}
 
-    This path is shown in \ref{fig:threed_motion}.
+    This path is shown in \autoref{fig:threed_motion}.
     This movement has been selected to be easily recreated, whilst showing movement in three different joint angles simultaneously. 
     The same data processing for the two dimensional elbow flex case is used to obtain RMSE of three different joint angle movements.
 
@@ -436,7 +441,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
   This time is then recorded, and then used to divide the distance where the arm started from to find the average speed of the arm during the experiment.   
 
   \(100\) samples were taken, with \(10\) runs of \(10\) experiments. 
-  Analysis of variance (ANOVA) shows no significant deviation between each run (see appendix for detailed ANOVA results).
+  Analysis of variance (ANOVA) shows no significant deviation between each set of experiments (see appendix \autoref{app:anova} for detailed ANOVA results).
   The controller method was roughly \(42 \%\) faster than the pose estimation algorithm, although with a lower standard deviation of \(0.043\) compared to \(0.053\).
   
   The speed difference is likely attributable to the operator's familiarity of using controllers for other tasks.
@@ -495,7 +500,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
   \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\linewidth]{images/transport_results.png}
-    \caption{Average time spent in each phase for either control method.}
+    \caption{Average time spent in each phase for either control method in the transport experiment.}
     \label{fig:experiment2res}
   \end{figure}
 
@@ -532,14 +537,41 @@ This section aims to develop a minimum viable product (MVP) version of both meth
 
 
 %%%%%%%%%%%%%%%%%% CONCLUSIONS %%%%%%%%%%%%%%%%%%
-\section{Conclusions and future work} % edit subsection heading as appropriate
+\section{Conclusions, future work and reflections} % edit subsection heading as appropriate
 \label{sec:conc}
+  This section summarises the major findings from the experiments carried out in the previous section, and provide several areas to be explored in future work.
   \subsection{Conclusions}
 	
+  The results of the experiments shows that in the arbitrary movement task, joystick control results in a \(42 \%\) faster average speed to reach a random position.
+  This could have been caused by multiple factors: the operator's proficiency with using joysticks previously, as well as intuitively the joystick control being more well suited to this task.
+  It follows that the joystick is able to manipulate the end effector coordinates one axis at a time to reach the target position systematically, whereas it is harder to move a hand to an arbitrary position.
+  
+  However, the use of pose estimation had increased performance in the two pick and place scenarios, having an average time of \(60.3 \%\) and \(57.2 \%\) respectively.
+  This is likely a combination of human intuition being more applicable, as well as a limitation of the inverse kinematics solver used for the joystick control.
+  Simply, the pose estimation solution is able to deliver 7 degrees of control to the arm simultaneously and intuitively, compared to the abstraction required to manipulate the arm with a joystick.
 
 	\subsection{Future work}
 
+  There are many ways to improve on the scope of this project, and the fidelity of the results.
+  The simplest would be for a larger sample size of operators - due to the limited time and budget of this project only the author was able to participate in data gathering for the experiments.
+  Using a wide range of participants, and noting their level of proficiency with using joysticks, could inform any correlation between performance increase and skill.
+  
+  Likewise, the pose estimation method is not necessarily the best representation of true teleoperation as discussed by \citeauthor{ref:vranalysis} \cite{ref:vranalysis}.
+  This is because the experiments show a third person perspective of the robots workspace, and not a point of view (POV) camera where the head may be.
+  Hence, there is still a level of control abstraction as the operator has to translate between coordinate spaces (which admittedly took very little time to get used to).
+  Future analysis could explore virtual reality (VR) and augmented reality (AR) set ups in conjunction with full arm tracking.
+  
+  Additionally, as mentioned in \autoref{sec:experiments}, the end effector is assumed to be a fully efficacious instrument - while wonderful for the purposes of science, not necessarily practical in reality.
+  Future work could expand with different types of end effector designs, and adding further tracking of individual fingers to be mapped to a manner of end effector designs.
 
+  \subsection{Project Management Reflections}
+
+  The author's previous placement experience as a software engineer (specialising in Python and networked microservices) made many of the technical aspects of this project achievable.
+  For example, the code to control simulation environment used the same publisher / subscriber model made it possible to progress from basic robot control to full teleoperation code very quickly.
+  Likewise, all of the data gathering and processing for the experiments was done with bespoke Python scripts, allowing for swift iteration and progress.
+  
+  Combined with the author's strict adherence to deadlines and planned milestones (and a purposefully strict project plan), allowed for a thorough project to be completed.
+  It would be unfair to not mention the supervisor, Dr. Watson, who aided in furthering of many of the ideas in this project, and providing the motivation to finish the project.
 
 %%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
 %\clearpage % uncomment to start on a new page if wanted
@@ -623,6 +655,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
     \end{table}
     
     \section{ANOVA Figures}\
+    \label{app:anova}
 
     %\subsection{Other appendices as necessary}
 \end{uomappendix}
