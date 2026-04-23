@@ -44,7 +44,7 @@ And then experiments were devised to measure performance against conventional jo
 
 The structure for this repository is as follows.
 
-Good luck. I made this repo with the knowledge that I'll never have to touch any of this Terry Davis - forsaken code ever again.
+[Good luck. I made this repo with the knowledge that I'll never have to touch any of this Terry Davis - forsaken code ever again.](https://en.wiktionary.org/wiki/there_is_nothing_more_permanent_than_a_temporary_solution)
 
 ```
 ├─assets                        // Miscellaneous assets used for meeting presentations
