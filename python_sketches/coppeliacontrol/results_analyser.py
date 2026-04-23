@@ -408,15 +408,15 @@ def build_overview_figure():
     def _style(a, xlabel, title):
         if state["standardised"]:
             xlabel = f"{xlabel}  [z-score]"
-        a.set_xlabel(xlabel, fontsize=11)
-        a.set_ylabel("Probability Density", fontsize=11)
-        a.set_title(title, fontsize=12, fontweight="bold")
+        a.set_xlabel(xlabel, fontsize=20)
+        a.set_ylabel("Probability Density", fontsize=20)
+        a.set_title(title, fontsize=20, fontweight="bold")
         n_total = sum(len(groups[k]) for k in ("A", "B"))
         if state["combined"]:
-            a.legend(fontsize=9, loc="upper right", frameon=True, framealpha=0.9)
+            a.legend(fontsize=15, loc="upper right", frameon=True, framealpha=0.9)
         else:
             a.legend(
-                fontsize=9,
+                fontsize=15,
                 loc="upper center",
                 bbox_to_anchor=(0.5, -0.18),
                 ncol=max(1, min(3, n_total // 2 + 1)),
@@ -470,7 +470,7 @@ def build_overview_figure():
         if all_types <= {"transport", "obstacle"} and "reach" not in all_types:
             spd_label = "Task Speed (cube→drop dist / duration, m/s)"
         elif "reach" in all_types and len(all_types) == 1:
-            spd_label = "Speed (units / s)"
+            spd_label = "Speed (m / s)"
         else:
             spd_label = "Speed (units / s  or  m/s)"
 
@@ -507,11 +507,11 @@ def build_overview_figure():
                     f"  |  collisions: μ={all_hits.mean():.2f} / trial  (press C)"
                 )
 
-        fig.suptitle(
-            f"Robot Arm Experiments — {subtitle}{tag_str}\n{group_str}",
-            fontsize=13,
-            fontweight="bold",
-        )
+        # fig.suptitle(
+        #     f"Robot Arm Experiments — {subtitle}{tag_str}\n{group_str}",
+        #     fontsize=13,
+        #     fontweight="bold",
+        # )
         fig.canvas.draw_idle()
 
     fig._redraw = redraw
@@ -709,14 +709,14 @@ def build_comparison_figure():
         )
         ax_kde.fill_between(x, stats.norm.pdf(x, mu, sigma), alpha=0.12, color=col)
         ax_kde.axvline(mu, color=col, linestyle=":", linewidth=1.4, alpha=0.7)
-    ax_kde.set_xlabel("Duration (s)", fontsize=11)
-    ax_kde.set_ylabel("Probability Density", fontsize=11)
+    ax_kde.set_xlabel("Duration (s)", fontsize=20)
+    ax_kde.set_ylabel("Probability Density", fontsize=20)
     ax_kde.set_title(
         f"Duration Distributions — {ta} vs {tb} (pooled)",
-        fontsize=12,
+        fontsize=20,
         fontweight="bold",
     )
-    ax_kde.legend(fontsize=10)
+    ax_kde.legend(fontsize=15)
     ax_kde.grid(axis="y", linestyle="--", alpha=0.4)
     ax_kde.spines[["top", "right"]].set_visible(False)
 
@@ -732,18 +732,18 @@ def build_comparison_figure():
             patch.set_facecolor(col)
             patch.set_alpha(0.65)
         ax_db.set_xticks([1, 2])
-        ax_db.set_xticklabels([label_a, label_b], fontsize=9)
+        ax_db.set_xticklabels([label_a, label_b], fontsize=20)
         ax_db.text(
             0.5,
             -0.28,
             anova_summary([dur_a, dur_b], "Duration"),
             transform=ax_db.transAxes,
             ha="center",
-            fontsize=9,
+            fontsize=20,
             bbox=dict(boxstyle="round,pad=0.4", fc="#EEF2FF", ec=col_a, alpha=0.9),
         )
-    ax_db.set_ylabel("Duration (s)", fontsize=11)
-    ax_db.set_title("Duration Box-Plot", fontsize=12, fontweight="bold")
+    ax_db.set_ylabel("Duration (s)", fontsize=20)
+    ax_db.set_title("Duration Box-Plot", fontsize=20, fontweight="bold")
     ax_db.grid(axis="y", linestyle="--", alpha=0.4)
     ax_db.spines[["top", "right"]].set_visible(False)
 
@@ -759,18 +759,18 @@ def build_comparison_figure():
             patch.set_facecolor(col)
             patch.set_alpha(0.65)
         ax_sb.set_xticks([1, 2])
-        ax_sb.set_xticklabels([label_a, label_b], fontsize=9)
+        ax_sb.set_xticklabels([label_a, label_b], fontsize=20)
         ax_sb.text(
             0.5,
             -0.28,
             anova_summary([spd_a, spd_b], "Speed"),
             transform=ax_sb.transAxes,
             ha="center",
-            fontsize=9,
+            fontsize=20,
             bbox=dict(boxstyle="round,pad=0.4", fc="#FFF5EE", ec=col_b, alpha=0.9),
         )
-    ax_sb.set_ylabel("Speed (m/s or units/s)", fontsize=11)
-    ax_sb.set_title("Speed Box-Plot", fontsize=12, fontweight="bold")
+    ax_sb.set_ylabel("Speed (m/s or units/s)", fontsize=20)
+    ax_sb.set_title("Speed Box-Plot", fontsize=20, fontweight="bold")
     ax_sb.grid(axis="y", linestyle="--", alpha=0.4)
     ax_sb.spines[["top", "right"]].set_visible(False)
 
@@ -808,12 +808,12 @@ def build_comparison_figure():
             alpha=0.15,
             label=f"{lbl} ±1 SD",
         )
-    ax_sl.set_xlabel("Move / Trial Index", fontsize=11)
-    ax_sl.set_ylabel("Mean Speed (m/s or units/s)", fontsize=11)
+    ax_sl.set_xlabel("Move / Trial Index", fontsize=20)
+    ax_sl.set_ylabel("Mean Speed (m/s or units/s)", fontsize=20)
     ax_sl.set_title(
-        "Group Mean Speed per Move  (±1 SD band)", fontsize=12, fontweight="bold"
+        "Group Mean Speed per Move  (±1 SD band)", fontsize=20, fontweight="bold"
     )
-    ax_sl.legend(fontsize=9)
+    ax_sl.legend(fontsize=15)
     ax_sl.grid(axis="y", linestyle="--", alpha=0.4)
     ax_sl.spines[["top", "right"]].set_visible(False)
 
@@ -869,7 +869,7 @@ def build_metrics_figure():
             at.set_fontweight("bold")
         ax.set_title(
             f"{title}\n{success}/{total} successful  ({rate:.1f}%)",
-            fontsize=11,
+            fontsize=20,
             fontweight="bold",
             pad=12,
         )
@@ -992,7 +992,7 @@ def build_phase_figure():
                 f"Avg collisions / trial:  {mean_hits:.2f}",
                 ha="center",
                 va="top",
-                fontsize=9,
+                fontsize=20,
                 color=COLLISION_COLOUR,
                 fontweight="bold",
                 transform=ax_pie.transData,
@@ -1030,7 +1030,7 @@ def build_phase_figure():
             0.43,
             "Pie area ∝ average total trial duration",
             ha="center",
-            fontsize=9,
+            fontsize=20,
             color="#888888",
             style="italic",
         )
@@ -1068,9 +1068,9 @@ def build_phase_figure():
 
     ax_box.set_xticks(tick_pos)
     ax_box.set_xticklabels(tick_lbl, fontsize=10)
-    ax_box.set_ylabel("Phase Duration (s)", fontsize=11)
+    ax_box.set_ylabel("Phase Duration (s)", fontsize=20)
     ax_box.set_title(
-        "Phase Time Distributions by Group", fontsize=12, fontweight="bold"
+        "Phase Time Distributions by Group", fontsize=20, fontweight="bold"
     )
     ax_box.grid(axis="y", linestyle="--", alpha=0.4)
 
@@ -1081,7 +1081,7 @@ def build_phase_figure():
             Patch(facecolor=group_cols[gk], alpha=0.65, label=group_titles[gk])
             for gk in group_keys_present
         ],
-        fontsize=9,
+        fontsize=15,
     )
 
     has_dist_data = any(len(e["dist_start_to_cube"]) > 0 for _, e in all_transport)
@@ -1122,14 +1122,14 @@ def build_phase_figure():
                 linestyle="--",
                 label=f"{lbl} fit  r={r:.2f} {'✓' if p_val < 0.05 else '✗'}",
             )
-        ax_scatter.set_xlabel("Distance: Start → Cube (cm)", fontsize=11)
-        ax_scatter.set_ylabel("Trial Duration (s)", fontsize=11)
+        ax_scatter.set_xlabel("Distance: Start → Cube (cm)", fontsize=20)
+        ax_scatter.set_ylabel("Trial Duration (s)", fontsize=20)
         ax_scatter.set_title(
             "Task Difficulty: Start Distance vs Duration",
-            fontsize=12,
+            fontsize=20,
             fontweight="bold",
         )
-        ax_scatter.legend(fontsize=8)
+        ax_scatter.legend(fontsize=15)
         ax_scatter.grid(linestyle="--", alpha=0.4)
     else:
         ax_scatter.text(
@@ -1143,7 +1143,7 @@ def build_phase_figure():
             color="#888888",
         )
         ax_scatter.set_title(
-            "Task Difficulty (no start-pos data)", fontsize=12, fontweight="bold"
+            "Task Difficulty (no start-pos data)", fontsize=20, fontweight="bold"
         )
 
     return fig
@@ -1212,7 +1212,7 @@ def build_collision_figure():
                 ha="center",
                 va="center",
                 transform=ax.transAxes,
-                fontsize=12,
+                fontsize=20,
                 color="#888888",
             )
         return fig
@@ -1264,10 +1264,10 @@ def build_collision_figure():
         )
 
     ax_bar.set_xticks(bar_x)
-    ax_bar.set_xticklabels(bar_labels, rotation=30, ha="right", fontsize=9)
-    ax_bar.set_ylabel("Mean Hits per Trial", fontsize=11)
+    ax_bar.set_xticklabels(bar_labels, rotation=30, ha="right", fontsize=20)
+    ax_bar.set_ylabel("Mean Hits per Trial", fontsize=20)
     ax_bar.set_title(
-        "Average Collisions per Trial  (±1 SD)", fontsize=12, fontweight="bold"
+        "Average Collisions per Trial  (±1 SD)", fontsize=20, fontweight="bold"
     )
 
     # Group legend
@@ -1280,7 +1280,7 @@ def build_collision_figure():
                 Patch(facecolor=group_cols[gk], alpha=0.72, label=group_titles[gk])
             )
     if legend_handles:
-        ax_bar.legend(handles=legend_handles, fontsize=9)
+        ax_bar.legend(handles=legend_handles, fontsize=15)
 
     # ── Top-right: box-plot of per-trial hit distributions ────────────────────
     box_data = [
@@ -1305,10 +1305,10 @@ def build_collision_figure():
         patch.set_alpha(0.65)
 
     ax_box.set_xticks(box_positions)
-    ax_box.set_xticklabels(bar_labels, rotation=30, ha="right", fontsize=9)
-    ax_box.set_ylabel("Hits per Trial", fontsize=11)
+    ax_box.set_xticklabels(bar_labels, rotation=30, ha="right", fontsize=20)
+    ax_box.set_ylabel("Hits per Trial", fontsize=20)
     ax_box.set_title(
-        "Hit Count Distribution per Experiment", fontsize=12, fontweight="bold"
+        "Hit Count Distribution per Experiment", fontsize=20, fontweight="bold"
     )
 
     # ── Bottom-left: scatter n_obstacles vs mean hits ─────────────────────────
@@ -1368,7 +1368,7 @@ def build_collision_figure():
         )
         ax_scatter.set_xlim(left=0)
         ax_scatter.set_ylim(bottom=0)
-        ax_scatter.legend(fontsize=9)
+        ax_scatter.legend(fontsize=15)
     else:
         ax_scatter.text(
             0.5,
@@ -1381,9 +1381,9 @@ def build_collision_figure():
             color="#888888",
         )
 
-    ax_scatter.set_xlabel("Number of Obstacles", fontsize=11)
-    ax_scatter.set_ylabel("Mean Hits per Trial", fontsize=11)
-    ax_scatter.set_title("Obstacle Count vs Mean Hits", fontsize=12, fontweight="bold")
+    ax_scatter.set_xlabel("Number of Obstacles", fontsize=20)
+    ax_scatter.set_ylabel("Mean Hits per Trial", fontsize=20)
+    ax_scatter.set_title("Obstacle Count vs Mean Hits", fontsize=20, fontweight="bold")
 
     # ── Bottom-right: summary stats table ─────────────────────────────────────
     col_headers = [
@@ -1480,7 +1480,7 @@ def build_collision_figure():
             table[row_idx, j].set_facecolor(bg)
             table[row_idx, j].set_text_props(fontweight="bold")
 
-    ax_table.set_title("Summary Statistics", fontsize=12, fontweight="bold", pad=12)
+    ax_table.set_title("Summary Statistics", fontsize=20, fontweight="bold", pad=12)
 
     return fig
 

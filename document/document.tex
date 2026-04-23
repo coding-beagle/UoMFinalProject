@@ -342,11 +342,11 @@ This section aims to develop a minimum viable product (MVP) version of both meth
     \end{figure}
 
   \subsection{Results of joint angle tracking methods}
-    Table \ref{tab:rmse_comparison} shows the compiled RMSE errors for tracking each joint in both the two dimension elbow flexing case and the three dimension movement path.
+    \autoref{tab:rmse_comparison} shows the compiled RMSE errors for tracking each joint in both the two dimension elbow flexing case and the three dimension movement path.
 
     \begin{table}[h]
-      \label{tab:rmse_comparison}
       \caption{RMSE error of either tracking method.}
+      \label{tab:rmse_comparison}
       \centering
       \small
       \begin{tabular}{>{\raggedright\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}}
@@ -427,58 +427,38 @@ This section aims to develop a minimum viable product (MVP) version of both meth
     The operator must stand further away from the screen to be in frame of the camera for the pose estimation method.
     To negate the perception advantages this would incur for the controller tasks, the controller method will be performed sitting this same distance away. 
 
-    Scenarios \(2\) and \(3\) consist of four different phases shown in \autoref{fig:pickandplacephases}
-    The object is considered 'held' as long as YuMi's grippers are within a certain distance threshold, and transition from an open state to a closed state.
-    This prevents the experiment from being limited by the design and simulation of a suitable end effector - though this may act as an interesting extension for future research.
-
     To measure the performance of the position matching task, the distance covered is divided by the time taken to find the normalised speed measurement.
-    To measure the performance of the pick and place task, the cumulative time spent in each phase is measured, along with the overall time to complete the task.
-    Likewise, to ensure fairness between each method in both pick and place tasks, seeded randomness will be used to ensure that both methods get the same trial spawn position.
-
-    \begin{figure}[h!]
-      \centering
-      \begin{subfigure}{0.3\linewidth}
-          \includegraphics[width=\linewidth]{images/approach.png}
-          \label{fig:image1}
-      \end{subfigure} 
-      \hspace{0.75em}
-      \begin{subfigure}{0.3\linewidth}
-          \includegraphics[width=\linewidth]{images/grip.png}
-          \label{fig:image2}
-      \end{subfigure}
-
-      \begin{subfigure}{0.3\linewidth}
-          \includegraphics[width=\linewidth]{images/carry.png}
-          \label{fig:image3}
-      \end{subfigure}
-      \hspace{0.75em}
-      \begin{subfigure}{0.3\linewidth}
-          \includegraphics[width=\linewidth]{images/place.png}
-          \label{fig:image4}
-      \end{subfigure}
-
-      \caption{Phases of the pick and place scenario}
-      \label{fig:pickandplacephases}
-    \end{figure}
   
   \subsection{Scenario 1: Random position matching task}
   \label{sec:scen1}
+
+  In this scenario a random position within the reachable envelope of the arm is marked and the operator must move the grippers of the arm to within \(0.06 \text{m}\) of this location as fast as they can.
+  This time is then recorded, and then used to divide the distance where the arm started from to find the average speed of the arm during the experiment.   
+
   \(100\) samples were taken, with \(10\) runs of \(10\) experiments. 
   Analysis of variance (ANOVA) shows no significant deviation between each run (see appendix for detailed ANOVA results).
-  The controller method was roughly \(42 \%\) faster than the pose estimation algorithm, although with a lower standard deviation of 0.043 compared to 0.053.
+  The controller method was roughly \(42 \%\) faster than the pose estimation algorithm, although with a lower standard deviation of \(0.043\) compared to \(0.053\).
   
   The speed difference is likely attributable to the operator's familiarity of using controllers for other tasks.
   Notably, the difference in standard deviation could imply that pose estimation is stronger for tasks that require consistency, rather than outright speed.
+  However, this standard deviation figure is small enough to be attributable to noise, if nothing else.
 
   \begin{figure}[h!]
     \centering
-    \includegraphics[width=\linewidth]{images/reach_experiment_results.png}
-    \caption{Standard distribution plot of the results of either experiment}
+    \includegraphics[width=0.6\linewidth]{images/reach_experiment_results.png}
+    \caption{Standard distribution plot of the results of either experiment.}
     \label{fig:experiment1res}
   \end{figure}
     
 	\subsection{Scenario 2: Simple environment pick and place task}
   \label{sec:scen2}
+
+  Scenarios \(2\) and \(3\) consist of four different phases shown in \autoref{fig:pickandplacephases}
+  The object is considered 'held' as long as YuMi's grippers are within a certain distance threshold, and transition from an open state to a closed state.
+  This prevents the experiment from being limited by the design and simulation of a suitable end effector - though this may act as an interesting extension for future research.
+
+  To measure the performance of the pick and place task, the cumulative time spent in each phase is measured, along with the overall time to complete the task.
+  Likewise, to ensure fairness between each method in both pick and place tasks, seeded randomness will be used to ensure that both methods get the same trial spawn position.
 
   The pose estimation algorithm shows \(60.3 \%\) reduction in time over the controller control in this task, with the noticeable difference being in the proportion of time spent in the 'approach' phase (see \autoref{fig:experiment2res})
   The controller method requires the operator to orient the gripper over the object, and doing this in certain arm positions can lead to singularities in the inverse kinematics solver, hence the longer time.
@@ -488,11 +468,36 @@ This section aims to develop a minimum viable product (MVP) version of both meth
 
   \begin{figure}[h!]
     \centering
-    \includegraphics[width=\linewidth]{images/transport_results.png}
-    \caption{Standard distribution plot of the results of either experiment}
-    \label{fig:experiment2res}
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=\linewidth]{images/approach.png}
+        \label{fig:image1}
+    \end{subfigure} 
+    \hspace{0.75em}
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=\linewidth]{images/grip.png}
+        \label{fig:image2}
+    \end{subfigure}
+
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=\linewidth]{images/carry.png}
+        \label{fig:image3}
+    \end{subfigure}
+    \hspace{0.75em}
+    \begin{subfigure}{0.3\linewidth}
+        \includegraphics[width=\linewidth]{images/place.png}
+        \label{fig:image4}
+    \end{subfigure}
+
+    \caption{Phases of the pick and place scenario}
+    \label{fig:pickandplacephases}
   \end{figure}
 
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/transport_results.png}
+    \caption{Average time spent in each phase for either control method.}
+    \label{fig:experiment2res}
+  \end{figure}
 
   \begin{figure}[h!]
     \centering
@@ -555,6 +560,7 @@ This section aims to develop a minimum viable product (MVP) version of both meth
 
     \begin{table}[h]
       \centering
+      \caption{Denavit-Hartenberg Parameters for 7-DoF Arm (where \(L_u\) is upper arm length and \(L_l\) is lower arm length)}
       \label{tab:dh_parameters}
       \small
       \begin{tabular}{>{\centering\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}}
@@ -576,7 +582,6 @@ This section aims to develop a minimum viable product (MVP) version of both meth
       7 & Wrist radial/ulnar deviation & \(q_7\) & 0 & 0 & 0 \\
       \bottomrule
       \end{tabular}
-      \caption{Denavit-Hartenberg Parameters for 7-DoF Arm (where \(L_u\) is upper arm length and \(L_l\) is lower arm length)}
     \end{table}
     
     \section{ANOVA Figures}\
