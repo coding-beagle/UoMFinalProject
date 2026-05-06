@@ -185,6 +185,12 @@ try:
     summary_printed = False
     gripper_open = True
 
+    start_joint_angles = [sim.getJointPosition(h) for h in joint_handles]
+    stuck_timer = 0.0
+    last_wrist_pos = None
+    STUCK_MOVE_THRESHOLD = 0.001  # metres — less than this counts as "not moved"
+    STUCK_TIMEOUT = 1.0  # seconds before reset
+
     print("Press [R] for Reach experiment, [T] for Transport, [Q] to quit.")
     print("Stretch your arm fully to calibrate reach mapping.")
     print("Open hand = gripper open | Closed fist = gripper closed.")
@@ -248,6 +254,20 @@ try:
 
         sim.step()
         wrist_pos = sim.getObjectPosition(rightGripperObject, -1)
+
+        # ── stuck detection ───────────────────────────────────────────────────
+        if last_wrist_pos is not None:
+            dist = sum((wrist_pos[i] - last_wrist_pos[i]) ** 2 for i in range(3)) ** 0.5
+            if dist < STUCK_MOVE_THRESHOLD:
+                stuck_timer += dt
+                if stuck_timer >= STUCK_TIMEOUT:
+                    print("Robot stuck — resetting joints to start configuration.")
+                    for h, a in zip(joint_handles, start_joint_angles):
+                        sim.setJointPosition(h, a)
+                    stuck_timer = 0.0
+            else:
+                stuck_timer = 0.0
+        last_wrist_pos = list(wrist_pos)
 
         # ── kinematics sample ─────────────────────────────────────────────────
         joint_angles_rad = [sim.getJointPosition(h) for h in joint_handles]
