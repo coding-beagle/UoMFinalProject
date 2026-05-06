@@ -42,6 +42,10 @@ class CameraThread(threading.Thread):
         self.hand_open = None
         self.hand_curl_ratios = None
         self._stop_event = threading.Event()
+        self.flipped = False
+
+    def flip(self, val):
+        self.flipped = val
 
     def stop(self):
         self._stop_event.set()
@@ -81,6 +85,7 @@ class CameraThread(threading.Thread):
                 if not ret:
                     continue
                 rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+                rgb = cv2.flip(rgb, 1) if self.flipped else rgb
 
                 pose_results = pose.process(rgb)
                 hand_results = hands.process(rgb)
@@ -113,7 +118,7 @@ class CameraThread(threading.Thread):
                     )
 
                 with self.lock:
-                    self.frame = bgr
+                    self.frame = cv2.flip(bgr, 1) if self.flipped else bgr
                     self.world_landmarks = pose_results.pose_world_landmarks
                     self.pose_landmarks = pose_results.pose_landmarks
                     self.tracking = pose_results.pose_world_landmarks is not None
@@ -133,11 +138,14 @@ class CameraThread(threading.Thread):
 # ── snapshot helpers ──────────────────────────────────────────────────────────
 
 
-def read_camera(cam_thread: CameraThread):
+def read_camera(cam_thread: CameraThread, flipped: bool = False):
     """Return a consistent snapshot tuple from a CameraThread."""
+    cam_thread.flip(flipped)
+    frame = cam_thread.frame.copy() if cam_thread.frame is not None else None
+
     with cam_thread.lock:
         return (
-            cam_thread.frame.copy() if cam_thread.frame is not None else None,
+            frame,
             cam_thread.world_landmarks,
             cam_thread.pose_landmarks,
             cam_thread.tracking,

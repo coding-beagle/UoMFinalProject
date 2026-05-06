@@ -1,20 +1,4 @@
 Traceback (most recent call last):
-  File "S:\Codes\betc-mote\python_sketches\coppeliacontrol\cleanposeestimation.py", line 30, in <module>
-    import mediapipe as mp
-  File "S:\Codes\betc-mote\python_sketches\coppeliacontrol\.venv\lib\site-packages\mediapipe\__init__.py", line 17, in <module>
-    import mediapipe.tasks.python as tasks
-  File "S:\Codes\betc-mote\python_sketches\coppeliacontrol\.venv\lib\site-packages\mediapipe\tasks\python\__init__.py", line 17, in <module>
-    from . import audio
-  File "S:\Codes\betc-mote\python_sketches\coppeliacontrol\.venv\lib\site-packages\mediapipe\tasks\python\audio\__init__.py", line 18, in <module>
-    import mediapipe.tasks.python.audio.audio_classifier
-  File "S:\Codes\betc-mote\python_sketches\coppeliacontrol\.venv\lib\site-packages\mediapipe\tasks\python\audio\audio_classifier.py", line 27, in <module>
-    from mediapipe.tasks.python.components.containers import audio_data as audio_data_module
-  File "S:\Codes\betc-mote\python_sketches\coppeliacontrol\.venv\lib\site-packages\mediapipe\tasks\python\components\containers\__init__.py", line 23, in <module>
-    import mediapipe.tasks.python.components.containers.landmark
-  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
-  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
-  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
-  File "<frozen importlib._bootstrap_external>", line 941, in get_code
-  File "<frozen importlib._bootstrap_external>", line 1039, in get_data
-KeyboardInterrupt
+  File "C:\Users\Clown Town\codes\UoMFinalProject\python_sketches\coppeliacontrol\cleanposeestimation.py", line 29, in <module>
+    import cv2
+ModuleNotFoundError: No module named 'cv2'

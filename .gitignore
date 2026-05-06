@@ -1,5 +1,6 @@
 *.ds_store
 *.venv
+*.pyc
 
 .venv/
 

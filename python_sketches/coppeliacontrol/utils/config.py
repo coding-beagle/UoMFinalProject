@@ -8,7 +8,7 @@ Edit values here; nothing else needs to change.
 from math import pi
 
 # ── camera configuration ──────────────────────────────────────────────────────
-CAMERA_INDICES = [0]  # OpenCV device indices; edit to match your setup
+CAMERA_INDICES = [1]  # OpenCV device indices; edit to match your setup
 PRIMARY_CAMERA = 0  # which index in CAMERA_INDICES is the preferred source
 TILE_WIDTH = 640  # display width of the primary (HUD) camera tile
 SECONDARY_TILE_WIDTH = 240

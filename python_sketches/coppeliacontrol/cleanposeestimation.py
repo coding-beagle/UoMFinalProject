@@ -165,6 +165,8 @@ mp_hands_mod = mp.solutions.hands
 hand_draw_spec = mp_draw.DrawingSpec(color=(255, 200, 0), thickness=1, circle_radius=2)
 hand_conn_spec = mp_draw.DrawingSpec(color=(200, 150, 0), thickness=1)
 
+flipped = False
+
 # ── main loop ─────────────────────────────────────────────────────────────────
 try:
     print("Starting simulation...")
@@ -192,7 +194,7 @@ try:
         dt = (now - prev_time) / cv2.getTickFrequency()
         prev_time = now
 
-        snapshots = [read_camera(ct) for ct in cam_threads]
+        snapshots = [read_camera(ct, flipped) for ct in cam_threads]
 
         # ── gripper state: OR gate across all cameras ─────────────────────────
         hand_states = [snap[5] for snap in snapshots if snap[5] is not None]
@@ -437,6 +439,8 @@ try:
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break
+        elif key == ord("f"):
+            flipped = not (flipped)
         elif key == ord("r"):
             if experiment is not None and experiment.results:
                 save_results(experiment, current_mode)
