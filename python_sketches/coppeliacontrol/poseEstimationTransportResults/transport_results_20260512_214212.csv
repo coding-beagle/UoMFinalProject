@@ -1,0 +1,2 @@
+trial,label,result,duration_s,cube_x,cube_y,cube_z,drop_x,drop_y,drop_z,start_x,start_y,start_z,dist_start_to_cube,dist_start_to_drop,phase_approach_s,phase_grip_s,phase_carry_s,phase_place_s
+1,Transport 1,success,12.815,0.7558,-0.0585,1.0686,0.6604,-0.0359,1.2783,0.7274,0.1934,1.2968,0.3411,0.2396,7.074,1.755,2.879,1.13

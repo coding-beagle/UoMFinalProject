@@ -69,7 +69,6 @@ import numpy as np
 from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
 
-
 # ─────────────────────────────────────────────────────────────────────────────
 # Colour palette (matches the controller UI feel)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -912,6 +911,7 @@ class TransportExperiment:
         az_centre: float = -90.0,
         seed: int = None,
         start_pos: Optional[List[float]] = None,
+        min_separation: float = 0.20,
     ) -> "TransportExperiment":
         """
         Generate n_trials pick-and-place tasks with cube and drop positions
@@ -925,10 +925,14 @@ class TransportExperiment:
             Can also be supplied live via update().
         """
         rng = random.Random(seed)
+
+        # Sample a generous pool so we have enough candidates left after
+        # rejecting pairs that fall closer than min_separation.
+        pool_size = max(n_trials * 6, 20)
         all_pos = sample_hemisphere_positions(
             shoulder=shoulder_pos,
             arm_length=arm_length,
-            n=n_trials * 2,
+            n=pool_size,
             min_reach=min_reach,
             max_reach=max_reach,
             min_elevation=min_elevation,
@@ -939,10 +943,35 @@ class TransportExperiment:
             seed=seed,
         )
         rng.shuffle(all_pos)
+
+        def _dist(a, b):
+            return math.sqrt(sum((a[i] - b[i]) ** 2 for i in range(3)))
+
         trials = []
-        for i in range(n_trials):
-            cube_pos = all_pos[i * 2]
-            drop_pos = all_pos[i * 2 + 1]
+        used = [False] * len(all_pos)
+        # Iterate until we have n_trials, picking a cube and then the first
+        # remaining candidate that is far enough from it.
+        i = 0
+        while len(trials) < n_trials and i < len(all_pos):
+            if used[i]:
+                i += 1
+                continue
+            cube_pos = all_pos[i]
+            used[i] = True
+            # Find a drop position at least min_separation away
+            drop_idx = None
+            for j in range(i + 1, len(all_pos)):
+                if used[j]:
+                    continue
+                if _dist(cube_pos, all_pos[j]) >= min_separation:
+                    drop_idx = j
+                    break
+            if drop_idx is None:
+                # Couldn't pair this cube — skip it and try the next
+                i += 1
+                continue
+            used[drop_idx] = True
+            drop_pos = all_pos[drop_idx]
             trials.append(
                 {
                     "cube_pos": cube_pos,
@@ -950,9 +979,19 @@ class TransportExperiment:
                     "pick_radius": pick_radius,
                     "drop_radius": drop_radius,
                     "timeout": timeout,
-                    "label": f"Transport {i+1}",
+                    "label": f"Transport {len(trials)+1}",
                 }
             )
+            i += 1
+
+        if len(trials) < n_trials:
+            raise RuntimeError(
+                f"Could only generate {len(trials)}/{n_trials} transport "
+                f"trials with min_separation={min_separation:.2f} m. "
+                f"Try lowering min_separation, widening the hemisphere "
+                f"sampling bounds, or reducing n_trials."
+            )
+
         return cls(sim, trials, start_pos=start_pos)
 
     # ── spawn ─────────────────────────────────────────────────────────────────
