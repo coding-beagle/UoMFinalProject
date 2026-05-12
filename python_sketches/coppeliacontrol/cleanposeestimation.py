@@ -167,6 +167,18 @@ hand_conn_spec = mp_draw.DrawingSpec(color=(200, 150, 0), thickness=1)
 
 flipped = False
 
+ELBOW_REST_POSE = {
+    joint_handles[0]: 0.5,  # J1: shoulder out
+    joint_handles[1]: -0.3,  # J2: shoulder down/forward
+    joint_handles[2]: 0.4,  # J3: upper-arm rotation — the swivel
+}
+# Higher precision values = stronger pull toward the rest pose. The IK solver
+# treats this as a secondary objective behind the wrist target.
+ELBOW_BIAS_WEIGHT = 0.05
+
+for jh, rest in ELBOW_REST_POSE.items():
+    sim.setJointTargetPosition(jh, rest)
+
 # ── main loop ─────────────────────────────────────────────────────────────────
 try:
     print("Starting simulation...")
@@ -243,6 +255,24 @@ try:
         target_pos = pose_filter.update_pos(target_pos)
         target_quat = pose_filter.update_quat(target_quat)
 
+        # Clamp target to the robot's reachable workspace.
+        # If the requested point lies outside a sphere of radius ROBOT_ARM_LENGTH
+        # around the shoulder, project it back onto the sphere surface. This
+        # gives the IK solver the closest reachable point instead of an
+        # impossible one, which would otherwise leave the arm stuck at full
+        # extension with a large residual error.
+        REACH_SAFETY = 0.98  # stay just inside the singular fully-extended pose
+        if target_pos is not None:
+            sx, sy, sz = robot_shoulder_world
+            dx = target_pos[0] - sx
+            dy = target_pos[1] - sy
+            dz = target_pos[2] - sz
+            dist = (dx * dx + dy * dy + dz * dz) ** 0.5
+            max_reach = ROBOT_ARM_LENGTH * REACH_SAFETY
+            if dist > max_reach and dist > 1e-6:
+                k = max_reach / dist
+                target_pos = [sx + dx * k, sy + dy * k, sz + dz * k]
+
         if target_pos:
             sim.setObjectPosition(target, target_pos)
         if target_quat:
@@ -250,7 +280,25 @@ try:
         if target_pos or target_quat:
             res, *_ = simIK.handleGroup(ikEnv, ikGroupUndamped, {"syncWorlds": True})
             if res != simIK.result_success:
-                simIK.handleGroup(ikEnv, ikGroupDamped, {"syncWorlds": True})
+                # Damped least-squares: tolerates near-singular configurations
+                # and yields the closest-point solution when the target is
+                # marginally out of reach or the orientation is over-constrained.
+                res, *_ = simIK.handleGroup(ikEnv, ikGroupDamped, {"syncWorlds": True})
+                if res != simIK.result_success:
+                    # Last resort: position only. DLS on position alone will
+                    # always converge toward the nearest reachable point in
+                    # joint space, so the arm keeps moving instead of freezing.
+                    if target_pos is not None:
+                        sim.setObjectPosition(target, target_pos)
+                    simIK.handleGroup(ikEnv, ikGroupDamped, {"syncWorlds": True})
+
+                j3_current = sim.getJointPosition(joint_handles[2])
+                j3_rest = ELBOW_REST_POSE[joint_handles[2]]
+                if j3_current < 0.0:  # crossed to the wrong (left) side
+                    # Pull J3 toward rest with a small step, bounded so we don't
+                    # snap and break wrist tracking.
+                    step = max(-0.05, min(0.05, (j3_rest - j3_current) * 0.3))
+                    sim.setJointPosition(joint_handles[2], j3_current + step)
 
         sim.step()
         wrist_pos = sim.getObjectPosition(rightGripperObject, -1)
